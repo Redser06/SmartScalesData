@@ -5,11 +5,12 @@ A personal weight tracking application built with Next.js 16, featuring AI-power
 ## Features
 
 - **Weight & Body Composition Tracking** - Log weight, BMI, body fat %, muscle mass, and more
+- **Food & Macro Tracking** - Log meals via chat ("I had a banana") with automatic calorie & macro calculation using Open Food Facts
 - **AI Chat Assistant** - Get insights about your progress using Google Gemini
 - **Secure Authentication** - Email/password login with NextAuth.js v5
 - **Password Recovery** - Email-based password reset via Resend
 - **Strong Password Validation** - Encourages passphrases (12+ characters)
-- **Data Visualization** - Charts and trends for your metrics
+- **Data Visualization** - Charts and trends for your metrics (Weight, Macros, Consumption Frequency)
 
 ## Tech Stack
 

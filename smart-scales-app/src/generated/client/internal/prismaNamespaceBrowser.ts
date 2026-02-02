@@ -54,7 +54,8 @@ export const ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   PasswordResetToken: 'PasswordResetToken',
-  WeightEntry: 'WeightEntry'
+  WeightEntry: 'WeightEntry',
+  NutritionEntry: 'NutritionEntry'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -163,6 +164,27 @@ export const WeightEntryScalarFieldEnum = {
 } as const
 
 export type WeightEntryScalarFieldEnum = (typeof WeightEntryScalarFieldEnum)[keyof typeof WeightEntryScalarFieldEnum]
+
+
+export const NutritionEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  timestamp: 'timestamp',
+  foodName: 'foodName',
+  brandName: 'brandName',
+  servingSize: 'servingSize',
+  servingCount: 'servingCount',
+  calories: 'calories',
+  protein: 'protein',
+  carbohydrates: 'carbohydrates',
+  fats: 'fats',
+  fiber: 'fiber',
+  sugar: 'sugar',
+  sourceId: 'sourceId',
+  tags: 'tags'
+} as const
+
+export type NutritionEntryScalarFieldEnum = (typeof NutritionEntryScalarFieldEnum)[keyof typeof NutritionEntryScalarFieldEnum]
 
 
 export const SortOrder = {

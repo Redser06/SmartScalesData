@@ -26,7 +26,6 @@ model User {
   accounts      Account[]
   sessions      Session[]
   weightEntries WeightEntry[]
-  nutritionEntries NutritionEntry[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -118,35 +117,6 @@ model WeightEntry {
   updatedAt DateTime @updatedAt
 
   // Index for user queries
-  @@index([userId])
-  @@index([timestamp])
-}
-
-model NutritionEntry {
-  id        String   @id @default(cuid())
-  userId    String
-  timestamp DateTime @default(now())
-  
-  // Food Details
-  foodName      String   // The user's term or API product name
-  brandName     String?  // Optional brand
-  servingSize   String?  // e.g., "100g", "1 slice"
-  servingCount  Float    @default(1.0)
-  
-  // Macros (per total entry, or normalized? Storing calculated totals is usually easier for querying)
-  calories      Float    // kcal
-  protein       Float    // g
-  carbohydrates Float    // g
-  fats          Float    // g
-  fiber         Float?   // g (optional)
-  sugar         Float?   // g (optional)
-  
-  // Meta
-  sourceId      String?  // OpenFoodFacts barcode/ID if available
-  tags          String?  // Comma-separated or JSON array of tags (e.g., "breakfast", "dairy", "high-protein")
-  
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@index([userId])
   @@index([timestamp])
 }

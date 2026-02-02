@@ -2,8 +2,10 @@
 
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { useSession, signOut } from 'next-auth/react';
-import { getWeightHistory, deleteWeightEntry, importCsvData } from './actions';
+import { getWeightHistory, deleteWeightEntry, importCsvData, getNutritionHistory } from './actions';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { DailyMacrosChart } from '@/components/analytics/DailyMacrosChart';
+import { FoodFrequencyChart } from '@/components/analytics/FoodFrequencyChart';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -53,7 +55,9 @@ export default function Dashboard() {
   const [projections, setProjections] = useState<any[]>([]);
   const [timeRange, setTimeRange] = useState("all");
   const [uploading, setUploading] = useState(false);
+
   const [uploadResult, setUploadResult] = useState<{ success: boolean; message: string } | null>(null);
+  const [nutrition, setNutrition] = useState<{ daily: any[], frequency: any[] }>({ daily: [], frequency: [] });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +103,10 @@ export default function Dashboard() {
       }
 
       setLoading(false);
+    });
+
+    getNutritionHistory().then(nut => {
+      setNutrition(nut);
     });
   }, []);
 
@@ -267,6 +275,20 @@ export default function Dashboard() {
               ) : (
                 <div className="text-zinc-500 text-center">Not enough data for predictions</div>
               )}
+            </div>
+
+          </div>
+        </div>
+
+        {/* Nutrition Section */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-white">Nutrition Insights</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="h-[400px]">
+              <DailyMacrosChart data={nutrition.daily} />
+            </div>
+            <div className="h-[400px]">
+              <FoodFrequencyChart data={nutrition.frequency} />
             </div>
           </div>
         </div>

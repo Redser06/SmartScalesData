@@ -4,7 +4,6 @@ import { useChat } from '@ai-sdk/react';
 import { useRef, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { X, Send, Bot, User, Sparkles } from "lucide-react";
 
 export default function ChatInterface() {
@@ -63,9 +62,9 @@ export default function ChatInterface() {
             )}
 
             {isOpen && (
-                <div className="bg-zinc-900 border border-zinc-700 rounded-2xl w-[380px] h-[600px] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 fade-in duration-200">
+                <div className="bg-zinc-900 border border-zinc-700 rounded-2xl w-[380px] h-[600px] max-h-[80vh] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 fade-in duration-200">
                     {/* Header */}
-                    <div className="bg-zinc-950 p-4 border-b border-zinc-800 flex items-center justify-between">
+                    <div className="bg-zinc-950 p-4 border-b border-zinc-800 flex items-center justify-between shrink-0">
                         <div className="flex items-center gap-3">
                             <div className="h-8 w-8 rounded-full bg-indigo-500/10 flex items-center justify-center">
                                 <Bot className="h-5 w-5 text-indigo-400" />
@@ -78,13 +77,19 @@ export default function ChatInterface() {
                                 </span>
                             </div>
                         </div>
-                        <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="text-zinc-400 hover:text-white hover:bg-zinc-800">
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setIsOpen(false)}
+                            className="text-zinc-400 hover:text-white hover:bg-zinc-800"
+                            title="Close Chat"
+                        >
                             <X className="h-4 w-4" />
                         </Button>
                     </div>
 
                     {/* Messages */}
-                    <ScrollArea className="flex-1 p-4 bg-zinc-900/50">
+                    <div className="flex-1 p-4 bg-zinc-900/50 overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
                         {messages.length === 0 && (
                             <div className="h-full flex flex-col items-center justify-center text-center p-6 text-zinc-500 space-y-4">
                                 <Sparkles className="h-12 w-12 text-zinc-700" />
@@ -145,10 +150,10 @@ export default function ChatInterface() {
                             )}
                             <div ref={messagesEndRef} />
                         </div>
-                    </ScrollArea>
+                    </div>
 
                     {/* Input */}
-                    <div className="p-4 bg-zinc-950 border-t border-zinc-800">
+                    <div className="p-4 bg-zinc-950 border-t border-zinc-800 shrink-0">
                         <form onSubmit={handleSubmit} className="flex gap-2">
                             <Input
                                 value={localInput}

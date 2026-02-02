@@ -47,3 +47,8 @@ export type PasswordResetToken = Prisma.PasswordResetTokenModel
  * 
  */
 export type WeightEntry = Prisma.WeightEntryModel
+/**
+ * Model NutritionEntry
+ * 
+ */
+export type NutritionEntry = Prisma.NutritionEntryModel

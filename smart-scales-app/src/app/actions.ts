@@ -137,3 +137,63 @@ export async function importCsvData(csvContent: string) {
         return { success: false, error: error.message || "Failed to import CSV" };
     }
 }
+
+export async function getNutritionHistory() {
+    const userId = await getCurrentUserId();
+    const now = new Date();
+    // Fetch last 30 days by default for now
+    const thirtyDaysAgo = new Date(now.setDate(now.getDate() - 30));
+
+    const entries = await prisma.nutritionEntry.findMany({
+        where: {
+            userId,
+            timestamp: { gte: thirtyDaysAgo }
+        },
+        orderBy: { timestamp: 'asc' },
+    });
+
+    // Aggregate by day
+    const dailyMap = new Map<string, { date: string, calories: number, protein: number, carbohydrates: number, fats: number }>();
+
+    // Food frequency map
+    const foodMap = new Map<string, { count: number, calories: number }>();
+
+    entries.forEach(entry => {
+        const dateKey = entry.timestamp.toISOString().split('T')[0];
+
+        // Daily Aggregation
+        if (!dailyMap.has(dateKey)) {
+            dailyMap.set(dateKey, { date: dateKey, calories: 0, protein: 0, carbohydrates: 0, fats: 0 });
+        }
+        const day = dailyMap.get(dateKey)!;
+        day.calories += entry.calories;
+        day.protein += entry.protein;
+        day.carbohydrates += entry.carbohydrates;
+        day.fats += entry.fats;
+
+        // Frequency Aggregation
+        const foodName = entry.foodName;
+        if (!foodMap.has(foodName)) {
+            foodMap.set(foodName, { count: 0, calories: 0 });
+        }
+        const food = foodMap.get(foodName)!;
+        food.count += 1;
+        // Running average calculation roughly or just total? Let's track sum and average later if needed.
+        // For chart, we needed avg calories maybe? chart expectation: { name: string; count: number; calories: number; }
+        // Let's store sum here and average in final map
+        food.calories += entry.calories;
+    });
+
+    const dailyData = Array.from(dailyMap.values());
+
+    const frequencyData = Array.from(foodMap.entries()).map(([name, data]) => ({
+        name,
+        count: data.count,
+        calories: Math.round(data.calories / data.count)
+    }));
+
+    return {
+        daily: dailyData,
+        frequency: frequencyData
+    };
+}

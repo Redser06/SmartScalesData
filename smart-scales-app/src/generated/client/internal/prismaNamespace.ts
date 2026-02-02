@@ -395,7 +395,8 @@ export const ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   PasswordResetToken: 'PasswordResetToken',
-  WeightEntry: 'WeightEntry'
+  WeightEntry: 'WeightEntry',
+  NutritionEntry: 'NutritionEntry'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "passwordResetToken" | "weightEntry"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "passwordResetToken" | "weightEntry" | "nutritionEntry"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -859,6 +860,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    NutritionEntry: {
+      payload: Prisma.$NutritionEntryPayload<ExtArgs>
+      fields: Prisma.NutritionEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NutritionEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NutritionEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.NutritionEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NutritionEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>
+        }
+        findMany: {
+          args: Prisma.NutritionEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>[]
+        }
+        create: {
+          args: Prisma.NutritionEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>
+        }
+        createMany: {
+          args: Prisma.NutritionEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NutritionEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.NutritionEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>
+        }
+        update: {
+          args: Prisma.NutritionEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.NutritionEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NutritionEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NutritionEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.NutritionEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NutritionEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.NutritionEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNutritionEntry>
+        }
+        groupBy: {
+          args: Prisma.NutritionEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NutritionEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NutritionEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NutritionEntryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -988,6 +1063,27 @@ export const WeightEntryScalarFieldEnum = {
 } as const
 
 export type WeightEntryScalarFieldEnum = (typeof WeightEntryScalarFieldEnum)[keyof typeof WeightEntryScalarFieldEnum]
+
+
+export const NutritionEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  timestamp: 'timestamp',
+  foodName: 'foodName',
+  brandName: 'brandName',
+  servingSize: 'servingSize',
+  servingCount: 'servingCount',
+  calories: 'calories',
+  protein: 'protein',
+  carbohydrates: 'carbohydrates',
+  fats: 'fats',
+  fiber: 'fiber',
+  sugar: 'sugar',
+  sourceId: 'sourceId',
+  tags: 'tags'
+} as const
+
+export type NutritionEntryScalarFieldEnum = (typeof NutritionEntryScalarFieldEnum)[keyof typeof NutritionEntryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1132,6 +1228,7 @@ export type GlobalOmitConfig = {
   verificationToken?: Prisma.VerificationTokenOmit
   passwordResetToken?: Prisma.PasswordResetTokenOmit
   weightEntry?: Prisma.WeightEntryOmit
+  nutritionEntry?: Prisma.NutritionEntryOmit
 }
 
 /* Types for Logging */
