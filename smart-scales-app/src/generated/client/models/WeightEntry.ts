@@ -81,6 +81,7 @@ export type WeightEntryMinAggregateOutputType = {
   note: string | null
   source: string | null
   rawData: string | null
+  userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -106,6 +107,7 @@ export type WeightEntryMaxAggregateOutputType = {
   note: string | null
   source: string | null
   rawData: string | null
+  userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -131,6 +133,7 @@ export type WeightEntryCountAggregateOutputType = {
   note: number
   source: number
   rawData: number
+  userId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -192,6 +195,7 @@ export type WeightEntryMinAggregateInputType = {
   note?: true
   source?: true
   rawData?: true
+  userId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -217,6 +221,7 @@ export type WeightEntryMaxAggregateInputType = {
   note?: true
   source?: true
   rawData?: true
+  userId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -242,6 +247,7 @@ export type WeightEntryCountAggregateInputType = {
   note?: true
   source?: true
   rawData?: true
+  userId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -354,6 +360,7 @@ export type WeightEntryGroupByOutputType = {
   note: string | null
   source: string
   rawData: string | null
+  userId: string | null
   createdAt: Date
   updatedAt: Date
   _count: WeightEntryCountAggregateOutputType | null
@@ -402,8 +409,10 @@ export type WeightEntryWhereInput = {
   note?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
   source?: Prisma.StringFilter<"WeightEntry"> | string
   rawData?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
+  userId?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
   createdAt?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type WeightEntryOrderByWithRelationInput = {
@@ -427,16 +436,18 @@ export type WeightEntryOrderByWithRelationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type WeightEntryWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  timestamp?: Date | string
   AND?: Prisma.WeightEntryWhereInput | Prisma.WeightEntryWhereInput[]
   OR?: Prisma.WeightEntryWhereInput[]
   NOT?: Prisma.WeightEntryWhereInput | Prisma.WeightEntryWhereInput[]
+  timestamp?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
   weight?: Prisma.FloatFilter<"WeightEntry"> | number
   unit?: Prisma.StringFilter<"WeightEntry"> | string
   bmi?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
@@ -455,9 +466,11 @@ export type WeightEntryWhereUniqueInput = Prisma.AtLeast<{
   note?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
   source?: Prisma.StringFilter<"WeightEntry"> | string
   rawData?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
+  userId?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
   createdAt?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
-}, "id" | "timestamp">
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+}, "id">
 
 export type WeightEntryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -480,6 +493,7 @@ export type WeightEntryOrderByWithAggregationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.WeightEntryCountOrderByAggregateInput
@@ -513,6 +527,7 @@ export type WeightEntryScalarWhereWithAggregatesInput = {
   note?: Prisma.StringNullableWithAggregatesFilter<"WeightEntry"> | string | null
   source?: Prisma.StringWithAggregatesFilter<"WeightEntry"> | string
   rawData?: Prisma.StringNullableWithAggregatesFilter<"WeightEntry"> | string | null
+  userId?: Prisma.StringNullableWithAggregatesFilter<"WeightEntry"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"WeightEntry"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"WeightEntry"> | Date | string
 }
@@ -539,6 +554,7 @@ export type WeightEntryCreateInput = {
   rawData?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutWeightEntriesInput
 }
 
 export type WeightEntryUncheckedCreateInput = {
@@ -562,6 +578,7 @@ export type WeightEntryUncheckedCreateInput = {
   note?: string | null
   source?: string
   rawData?: string | null
+  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -588,6 +605,7 @@ export type WeightEntryUpdateInput = {
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutWeightEntriesNestedInput
 }
 
 export type WeightEntryUncheckedUpdateInput = {
@@ -611,6 +629,7 @@ export type WeightEntryUncheckedUpdateInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -636,6 +655,7 @@ export type WeightEntryCreateManyInput = {
   note?: string | null
   source?: string
   rawData?: string | null
+  userId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -685,8 +705,19 @@ export type WeightEntryUncheckedUpdateManyInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WeightEntryListRelationFilter = {
+  every?: Prisma.WeightEntryWhereInput
+  some?: Prisma.WeightEntryWhereInput
+  none?: Prisma.WeightEntryWhereInput
+}
+
+export type WeightEntryOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type WeightEntryCountOrderByAggregateInput = {
@@ -710,6 +741,7 @@ export type WeightEntryCountOrderByAggregateInput = {
   note?: Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -752,6 +784,7 @@ export type WeightEntryMaxOrderByAggregateInput = {
   note?: Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -777,6 +810,7 @@ export type WeightEntryMinOrderByAggregateInput = {
   note?: Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -798,8 +832,46 @@ export type WeightEntrySumOrderByAggregateInput = {
   leanBodyMass?: Prisma.SortOrder
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
+export type WeightEntryCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.WeightEntryCreateWithoutUserInput, Prisma.WeightEntryUncheckedCreateWithoutUserInput> | Prisma.WeightEntryCreateWithoutUserInput[] | Prisma.WeightEntryUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.WeightEntryCreateOrConnectWithoutUserInput | Prisma.WeightEntryCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.WeightEntryCreateManyUserInputEnvelope
+  connect?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+}
+
+export type WeightEntryUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.WeightEntryCreateWithoutUserInput, Prisma.WeightEntryUncheckedCreateWithoutUserInput> | Prisma.WeightEntryCreateWithoutUserInput[] | Prisma.WeightEntryUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.WeightEntryCreateOrConnectWithoutUserInput | Prisma.WeightEntryCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.WeightEntryCreateManyUserInputEnvelope
+  connect?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+}
+
+export type WeightEntryUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.WeightEntryCreateWithoutUserInput, Prisma.WeightEntryUncheckedCreateWithoutUserInput> | Prisma.WeightEntryCreateWithoutUserInput[] | Prisma.WeightEntryUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.WeightEntryCreateOrConnectWithoutUserInput | Prisma.WeightEntryCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.WeightEntryUpsertWithWhereUniqueWithoutUserInput | Prisma.WeightEntryUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.WeightEntryCreateManyUserInputEnvelope
+  set?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+  disconnect?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+  delete?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+  connect?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+  update?: Prisma.WeightEntryUpdateWithWhereUniqueWithoutUserInput | Prisma.WeightEntryUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.WeightEntryUpdateManyWithWhereWithoutUserInput | Prisma.WeightEntryUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.WeightEntryScalarWhereInput | Prisma.WeightEntryScalarWhereInput[]
+}
+
+export type WeightEntryUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.WeightEntryCreateWithoutUserInput, Prisma.WeightEntryUncheckedCreateWithoutUserInput> | Prisma.WeightEntryCreateWithoutUserInput[] | Prisma.WeightEntryUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.WeightEntryCreateOrConnectWithoutUserInput | Prisma.WeightEntryCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.WeightEntryUpsertWithWhereUniqueWithoutUserInput | Prisma.WeightEntryUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.WeightEntryCreateManyUserInputEnvelope
+  set?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+  disconnect?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+  delete?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+  connect?: Prisma.WeightEntryWhereUniqueInput | Prisma.WeightEntryWhereUniqueInput[]
+  update?: Prisma.WeightEntryUpdateWithWhereUniqueWithoutUserInput | Prisma.WeightEntryUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.WeightEntryUpdateManyWithWhereWithoutUserInput | Prisma.WeightEntryUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.WeightEntryScalarWhereInput | Prisma.WeightEntryScalarWhereInput[]
 }
 
 export type FloatFieldUpdateOperationsInput = {
@@ -810,10 +882,6 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
 export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -822,16 +890,214 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type WeightEntryCreateWithoutUserInput = {
+  timestamp: Date | string
+  weight: number
+  unit?: string
+  bmi?: number | null
+  bodyFatPercentage?: number | null
+  muscleMass?: number | null
+  visceralFat?: number | null
+  bodyWaterPercentage?: number | null
+  boneMass?: number | null
+  bmr?: number | null
+  bodyType?: string | null
+  bodyScore?: number | null
+  proteinRate?: number | null
+  skeletalMuscleRate?: number | null
+  subcutaneousFat?: number | null
+  leanBodyMass?: number | null
+  note?: string | null
+  source?: string
+  rawData?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WeightEntryUncheckedCreateWithoutUserInput = {
+  id?: number
+  timestamp: Date | string
+  weight: number
+  unit?: string
+  bmi?: number | null
+  bodyFatPercentage?: number | null
+  muscleMass?: number | null
+  visceralFat?: number | null
+  bodyWaterPercentage?: number | null
+  boneMass?: number | null
+  bmr?: number | null
+  bodyType?: string | null
+  bodyScore?: number | null
+  proteinRate?: number | null
+  skeletalMuscleRate?: number | null
+  subcutaneousFat?: number | null
+  leanBodyMass?: number | null
+  note?: string | null
+  source?: string
+  rawData?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WeightEntryCreateOrConnectWithoutUserInput = {
+  where: Prisma.WeightEntryWhereUniqueInput
+  create: Prisma.XOR<Prisma.WeightEntryCreateWithoutUserInput, Prisma.WeightEntryUncheckedCreateWithoutUserInput>
+}
+
+export type WeightEntryCreateManyUserInputEnvelope = {
+  data: Prisma.WeightEntryCreateManyUserInput | Prisma.WeightEntryCreateManyUserInput[]
+}
+
+export type WeightEntryUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.WeightEntryWhereUniqueInput
+  update: Prisma.XOR<Prisma.WeightEntryUpdateWithoutUserInput, Prisma.WeightEntryUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.WeightEntryCreateWithoutUserInput, Prisma.WeightEntryUncheckedCreateWithoutUserInput>
+}
+
+export type WeightEntryUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.WeightEntryWhereUniqueInput
+  data: Prisma.XOR<Prisma.WeightEntryUpdateWithoutUserInput, Prisma.WeightEntryUncheckedUpdateWithoutUserInput>
+}
+
+export type WeightEntryUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.WeightEntryScalarWhereInput
+  data: Prisma.XOR<Prisma.WeightEntryUpdateManyMutationInput, Prisma.WeightEntryUncheckedUpdateManyWithoutUserInput>
+}
+
+export type WeightEntryScalarWhereInput = {
+  AND?: Prisma.WeightEntryScalarWhereInput | Prisma.WeightEntryScalarWhereInput[]
+  OR?: Prisma.WeightEntryScalarWhereInput[]
+  NOT?: Prisma.WeightEntryScalarWhereInput | Prisma.WeightEntryScalarWhereInput[]
+  id?: Prisma.IntFilter<"WeightEntry"> | number
+  timestamp?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
+  weight?: Prisma.FloatFilter<"WeightEntry"> | number
+  unit?: Prisma.StringFilter<"WeightEntry"> | string
+  bmi?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  bodyFatPercentage?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  muscleMass?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  visceralFat?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  bodyWaterPercentage?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  boneMass?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  bmr?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  bodyType?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
+  bodyScore?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  proteinRate?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  skeletalMuscleRate?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  subcutaneousFat?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  leanBodyMass?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  note?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
+  source?: Prisma.StringFilter<"WeightEntry"> | string
+  rawData?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
+  userId?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
+}
+
+export type WeightEntryCreateManyUserInput = {
+  id?: number
+  timestamp: Date | string
+  weight: number
+  unit?: string
+  bmi?: number | null
+  bodyFatPercentage?: number | null
+  muscleMass?: number | null
+  visceralFat?: number | null
+  bodyWaterPercentage?: number | null
+  boneMass?: number | null
+  bmr?: number | null
+  bodyType?: string | null
+  bodyScore?: number | null
+  proteinRate?: number | null
+  skeletalMuscleRate?: number | null
+  subcutaneousFat?: number | null
+  leanBodyMass?: number | null
+  note?: string | null
+  source?: string
+  rawData?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WeightEntryUpdateWithoutUserInput = {
+  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  bmi?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyFatPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  muscleMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  visceralFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyWaterPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  boneMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bmr?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  proteinRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WeightEntryUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  bmi?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyFatPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  muscleMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  visceralFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyWaterPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  boneMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bmr?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  proteinRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WeightEntryUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  bmi?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyFatPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  muscleMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  visceralFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyWaterPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  boneMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bmr?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bodyType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  proteinRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -857,8 +1123,10 @@ export type WeightEntrySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   note?: boolean
   source?: boolean
   rawData?: boolean
+  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  user?: boolean | Prisma.WeightEntry$userArgs<ExtArgs>
 }, ExtArgs["result"]["weightEntry"]>
 
 export type WeightEntrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -882,8 +1150,10 @@ export type WeightEntrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   note?: boolean
   source?: boolean
   rawData?: boolean
+  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  user?: boolean | Prisma.WeightEntry$userArgs<ExtArgs>
 }, ExtArgs["result"]["weightEntry"]>
 
 export type WeightEntrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -907,8 +1177,10 @@ export type WeightEntrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   note?: boolean
   source?: boolean
   rawData?: boolean
+  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  user?: boolean | Prisma.WeightEntry$userArgs<ExtArgs>
 }, ExtArgs["result"]["weightEntry"]>
 
 export type WeightEntrySelectScalar = {
@@ -932,15 +1204,27 @@ export type WeightEntrySelectScalar = {
   note?: boolean
   source?: boolean
   rawData?: boolean
+  userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type WeightEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "timestamp" | "weight" | "unit" | "bmi" | "bodyFatPercentage" | "muscleMass" | "visceralFat" | "bodyWaterPercentage" | "boneMass" | "bmr" | "bodyType" | "bodyScore" | "proteinRate" | "skeletalMuscleRate" | "subcutaneousFat" | "leanBodyMass" | "note" | "source" | "rawData" | "createdAt" | "updatedAt", ExtArgs["result"]["weightEntry"]>
+export type WeightEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "timestamp" | "weight" | "unit" | "bmi" | "bodyFatPercentage" | "muscleMass" | "visceralFat" | "bodyWaterPercentage" | "boneMass" | "bmr" | "bodyType" | "bodyScore" | "proteinRate" | "skeletalMuscleRate" | "subcutaneousFat" | "leanBodyMass" | "note" | "source" | "rawData" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["weightEntry"]>
+export type WeightEntryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.WeightEntry$userArgs<ExtArgs>
+}
+export type WeightEntryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.WeightEntry$userArgs<ExtArgs>
+}
+export type WeightEntryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.WeightEntry$userArgs<ExtArgs>
+}
 
 export type $WeightEntryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "WeightEntry"
-  objects: {}
+  objects: {
+    user: Prisma.$UserPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     timestamp: Date
@@ -962,6 +1246,7 @@ export type $WeightEntryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     note: string | null
     source: string
     rawData: string | null
+    userId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["weightEntry"]>
@@ -1358,6 +1643,7 @@ readonly fields: WeightEntryFieldRefs;
  */
 export interface Prisma__WeightEntryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  user<T extends Prisma.WeightEntry$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeightEntry$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1407,6 +1693,7 @@ export interface WeightEntryFieldRefs {
   readonly note: Prisma.FieldRef<"WeightEntry", 'String'>
   readonly source: Prisma.FieldRef<"WeightEntry", 'String'>
   readonly rawData: Prisma.FieldRef<"WeightEntry", 'String'>
+  readonly userId: Prisma.FieldRef<"WeightEntry", 'String'>
   readonly createdAt: Prisma.FieldRef<"WeightEntry", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"WeightEntry", 'DateTime'>
 }
@@ -1426,6 +1713,10 @@ export type WeightEntryFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
+  /**
    * Filter, which WeightEntry to fetch.
    */
   where: Prisma.WeightEntryWhereUniqueInput
@@ -1444,6 +1735,10 @@ export type WeightEntryFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
+  /**
    * Filter, which WeightEntry to fetch.
    */
   where: Prisma.WeightEntryWhereUniqueInput
@@ -1461,6 +1756,10 @@ export type WeightEntryFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the WeightEntry
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
   /**
    * Filter, which WeightEntry to fetch.
    */
@@ -1510,6 +1809,10 @@ export type WeightEntryFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
+  /**
    * Filter, which WeightEntry to fetch.
    */
   where?: Prisma.WeightEntryWhereInput
@@ -1558,6 +1861,10 @@ export type WeightEntryFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
+  /**
    * Filter, which WeightEntries to fetch.
    */
   where?: Prisma.WeightEntryWhereInput
@@ -1601,6 +1908,10 @@ export type WeightEntryCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
+  /**
    * The data needed to create a WeightEntry.
    */
   data: Prisma.XOR<Prisma.WeightEntryCreateInput, Prisma.WeightEntryUncheckedCreateInput>
@@ -1632,6 +1943,10 @@ export type WeightEntryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many WeightEntries.
    */
   data: Prisma.WeightEntryCreateManyInput | Prisma.WeightEntryCreateManyInput[]
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1646,6 +1961,10 @@ export type WeightEntryUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the WeightEntry
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
   /**
    * The data needed to update a WeightEntry.
    */
@@ -1698,6 +2017,10 @@ export type WeightEntryUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many WeightEntries to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1712,6 +2035,10 @@ export type WeightEntryUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the WeightEntry
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
   /**
    * The filter to search for the WeightEntry to update in case it exists.
    */
@@ -1739,6 +2066,10 @@ export type WeightEntryDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
+  /**
    * Filter which WeightEntry to delete.
    */
   where: Prisma.WeightEntryWhereUniqueInput
@@ -1759,6 +2090,25 @@ export type WeightEntryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * WeightEntry.user
+ */
+export type WeightEntry$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
  * WeightEntry without action
  */
 export type WeightEntryDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1770,4 +2120,8 @@ export type WeightEntryDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the WeightEntry
    */
   omit?: Prisma.WeightEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeightEntryInclude<ExtArgs> | null
 }

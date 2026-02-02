@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useState, useMemo } from 'react';
-import { getWeightHistory, deleteWeightEntry } from './actions';
+import { useEffect, useState, useMemo, useRef } from 'react';
+import { useSession, signOut } from 'next-auth/react';
+import { getWeightHistory, deleteWeightEntry, importCsvData } from './actions';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ArrowDownIcon, ArrowUpIcon, Scale, Calendar, Activity, TrendingDown, Target, Trash2 } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { ArrowDownIcon, ArrowUpIcon, Scale, Calendar, Activity, TrendingDown, Target, Trash2, Upload, LogOut } from 'lucide-react';
 import { format, subDays, isAfter } from 'date-fns';
 import { calculateTrend, getProjections } from '@/lib/predictions';
 import ChatInterface from '@/components/chat-interface';
@@ -44,11 +46,45 @@ const PredictionCard = ({ label, date, value, change }: any) => (
 )
 
 export default function Dashboard() {
+  const { data: session } = useSession();
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedEntry, setSelectedEntry] = useState<any>(null);
   const [projections, setProjections] = useState<any[]>([]);
   const [timeRange, setTimeRange] = useState("all");
+  const [uploading, setUploading] = useState(false);
+  const [uploadResult, setUploadResult] = useState<{ success: boolean; message: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setUploadResult(null);
+
+    try {
+      const content = await file.text();
+      const result = await importCsvData(content);
+
+      if (result.success) {
+        setUploadResult({
+          success: true,
+          message: `Imported ${result.imported} entries${result.skipped ? `, skipped ${result.skipped} duplicates` : ''}`
+        });
+        // Refresh data
+        const history = await getWeightHistory();
+        setData(history);
+      } else {
+        setUploadResult({ success: false, message: result.error || 'Import failed' });
+      }
+    } catch (error: any) {
+      setUploadResult({ success: false, message: error.message || 'Failed to read file' });
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   useEffect(() => {
     getWeightHistory().then((history) => {
@@ -101,15 +137,32 @@ export default function Dashboard() {
             <h1 className="text-3xl font-bold tracking-tight text-white mb-2">Smart Scales Tracker</h1>
             <p className="text-zinc-400">Your weight loss journey at a glance.</p>
           </div>
-          <Tabs defaultValue="all" value={timeRange} onValueChange={setTimeRange} className="w-[400px]">
-            <TabsList className="grid w-full grid-cols-5 bg-zinc-900 border border-zinc-800">
-              <TabsTrigger value="1m" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">1M</TabsTrigger>
-              <TabsTrigger value="3m" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">3M</TabsTrigger>
-              <TabsTrigger value="6m" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">6M</TabsTrigger>
-              <TabsTrigger value="1y" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">1Y</TabsTrigger>
-              <TabsTrigger value="all" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">All</TabsTrigger>
-            </TabsList>
-          </Tabs>
+          <div className="flex items-center gap-4">
+            <Tabs defaultValue="all" value={timeRange} onValueChange={setTimeRange} className="w-[400px]">
+              <TabsList className="grid w-full grid-cols-5 bg-zinc-900 border border-zinc-800">
+                <TabsTrigger value="1m" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">1M</TabsTrigger>
+                <TabsTrigger value="3m" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">3M</TabsTrigger>
+                <TabsTrigger value="6m" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">6M</TabsTrigger>
+                <TabsTrigger value="1y" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">1Y</TabsTrigger>
+                <TabsTrigger value="all" className="data-[state=active]:bg-zinc-800 data-[state=active]:text-white text-zinc-500 hover:text-zinc-300">All</TabsTrigger>
+              </TabsList>
+            </Tabs>
+            <div className="flex items-center gap-3 pl-4 border-l border-zinc-800">
+              <div className="text-right">
+                <p className="text-sm font-medium text-white">{session?.user?.name || 'User'}</p>
+                <p className="text-xs text-zinc-500">{session?.user?.email}</p>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => signOut()}
+                className="text-zinc-400 hover:text-white hover:bg-zinc-800"
+                title="Sign out"
+              >
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Stats Grid */}
@@ -221,8 +274,34 @@ export default function Dashboard() {
         {/* Recent Entries Table */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden flex flex-col h-[600px]">
           <div className="p-6 border-b border-zinc-800 shrink-0">
-            <h3 className="text-lg font-semibold text-white">Recent Entries</h3>
-            <p className="text-sm text-zinc-500">Click on any row to view full composition details.</p>
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-white">Recent Entries</h3>
+                <p className="text-sm text-zinc-500">Click on any row to view full composition details.</p>
+              </div>
+              <div className="flex items-center gap-3">
+                {uploadResult && (
+                  <span className={`text-sm ${uploadResult.success ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {uploadResult.message}
+                  </span>
+                )}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                  accept=".csv"
+                  className="hidden"
+                />
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                  className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-600/50 text-white text-sm font-medium rounded-lg transition-colors"
+                >
+                  <Upload className="h-4 w-4" />
+                  {uploading ? 'Importing...' : 'Import CSV'}
+                </button>
+              </div>
+            </div>
           </div>
           <div className="flex-1 overflow-hidden relative">
             <ScrollArea className="h-full w-full">

@@ -11,28 +11,112 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model WeightEntry {
-  id                 Int      @id @default(autoincrement())
-  timestamp          DateTime @unique // Enhance uniqueness constraint to prevent duplicates
-  weight             Float
-  unit               String   @default("kg")
-  bmi                Float?
-  bodyFatPercentage  Float?
-  muscleMass         Float?
-  visceralFat        Float?
-  bodyWaterPercentage Float?
-  boneMass           Float?
-  bmr                Float?
-  bodyType           String?
-  bodyScore          Float?
-  proteinRate        Float?
-  skeletalMuscleRate Float?
-  subcutaneousFat    Float?
-  leanBodyMass       Float?
-  note               String?
-  source             String   @default("old_scale") // "old_scale", "new_scale", "manual"
-  rawData            String?  // Storing JSON as string for SQLite compatibility if needed, or use specific fields
+// ============================================
+// AUTH.JS MODELS
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // For credentials provider (hashed)
+
+  accounts      Account[]
+  sessions      Session[]
+  weightEntries WeightEntry[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expires   DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, token])
+}
+
+// ============================================
+// APPLICATION MODELS
+// ============================================
+
+model WeightEntry {
+  id                  Int      @id @default(autoincrement())
+  timestamp           DateTime
+  weight              Float
+  unit                String   @default("kg")
+  bmi                 Float?
+  bodyFatPercentage   Float?
+  muscleMass          Float?
+  visceralFat         Float?
+  bodyWaterPercentage Float?
+  boneMass            Float?
+  bmr                 Float?
+  bodyType            String?
+  bodyScore           Float?
+  proteinRate         Float?
+  skeletalMuscleRate  Float?
+  subcutaneousFat     Float?
+  leanBodyMass        Float?
+  note                String?
+  source              String   @default("old_scale")
+  rawData             String?
+
+  // User relationship for data isolation (optional during migration)
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Index for user queries
+  @@index([userId])
+  @@index([timestamp])
 }

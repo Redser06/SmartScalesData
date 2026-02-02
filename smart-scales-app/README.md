@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Scales Tracker
+
+A personal weight tracking application built with Next.js 16, featuring AI-powered insights and comprehensive body composition metrics.
+
+## Features
+
+- **Weight & Body Composition Tracking** - Log weight, BMI, body fat %, muscle mass, and more
+- **AI Chat Assistant** - Get insights about your progress using Google Gemini
+- **Secure Authentication** - Email/password login with NextAuth.js v5
+- **Password Recovery** - Email-based password reset via Resend
+- **Strong Password Validation** - Encourages passphrases (12+ characters)
+- **Data Visualization** - Charts and trends for your metrics
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Database**: SQLite with Prisma ORM
+- **Authentication**: NextAuth.js v5 (JWT sessions)
+- **Email**: Resend (transactional emails)
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd smart-scales-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Edit `.env.local` and add:
+   ```env
+   AUTH_SECRET="<generate-with-openssl-rand-base64-32>"
+   RESEND_API_KEY="re_xxxxx"  # Get from https://resend.com/api-keys
+   GOOGLE_GENERATIVE_AI_API_KEY="<your-gemini-key>"  # Optional, for AI chat
+   ```
+
+4. Set up the database:
+   ```bash
+   npx prisma migrate dev
+   ```
+
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) and create an account.
+
+## Authentication
+
+The app includes a complete authentication system:
+
+- **Sign up** (`/signup`) - Create account with email/password
+- **Sign in** (`/login`) - Email/password login
+- **Forgot password** (`/forgot-password`) - Request password reset email
+- **Reset password** (`/reset-password/[token]`) - Set new password
+
+### Password Requirements
+
+- Minimum 12 characters
+- No common passwords (password123, admin, etc.)
+- Passphrases encouraged (e.g., "purple monkey dishwasher cloud")
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── api/auth/        # NextAuth API routes
+│   ├── forgot-password/ # Password recovery
+│   ├── login/           # Sign in page
+│   ├── reset-password/  # Password reset page
+│   ├── signup/          # Registration page
+│   └── page.tsx         # Dashboard
+├── lib/
+│   ├── auth.ts          # NextAuth configuration
+│   ├── email.ts         # Resend email service
+│   ├── password.ts      # Password validation
+│   └── prisma.ts        # Database client
+└── proxy.ts             # Route protection
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Private - All rights reserved

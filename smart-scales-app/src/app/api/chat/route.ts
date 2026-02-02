@@ -3,12 +3,13 @@ import { streamText, convertToModelMessages, stepCountIs } from 'ai';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
+import { auth } from '@/lib/auth';
 
-// Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
-async function getWeightHistoryDirect() {
+async function getWeightHistoryDirect(userId: string) {
     const entries = await prisma.weightEntry.findMany({
+        where: { userId },
         orderBy: { timestamp: 'asc' },
     });
     return entries.map(entry => ({
@@ -19,10 +20,11 @@ async function getWeightHistoryDirect() {
     }));
 }
 
-async function logWeightDirect(data: { weight: number; note?: string; bodyFat?: number }) {
+async function logWeightDirect(userId: string, data: { weight: number; note?: string; bodyFat?: number }) {
     try {
         await prisma.weightEntry.create({
             data: {
+                userId,
                 weight: data.weight,
                 timestamp: new Date(),
                 unit: 'kg',
@@ -40,15 +42,22 @@ async function logWeightDirect(data: { weight: number; note?: string; bodyFat?: 
 }
 
 export async function POST(req: Request) {
+    // Get authenticated user
+    const session = await auth();
+
+    if (!session?.user?.id) {
+        return new Response("Unauthorized", { status: 401 });
+    }
+
+    const userId = session.user.id;
     const { messages } = await req.json();
 
-    // Convert UIMessages from client to ModelMessages for streamText
     const modelMessages = await convertToModelMessages(messages);
 
     const result = streamText({
         model: google('gemini-2.0-flash'),
         messages: modelMessages,
-        stopWhen: stepCountIs(5), // Allow multiple tool call rounds before stopping
+        stopWhen: stepCountIs(5),
         system: `You are a helpful and motivating health assistant for the "Smart Scales Tracker" app.
 
 You have access to the user's weight data and can perform actions.
@@ -69,7 +78,7 @@ Guidelines:
                     limit: z.number().optional().describe('Number of recent entries to retrieve'),
                 }),
                 execute: async ({ limit }: { limit?: number }) => {
-                    const history = await getWeightHistoryDirect();
+                    const history = await getWeightHistoryDirect(userId);
                     const count = limit || 20;
                     const recentHistory = history.slice(-count).map((h) => ({
                         date: new Date(h.timestamp).toLocaleDateString(),
@@ -88,7 +97,7 @@ Guidelines:
                     note: z.string().optional().describe('Optional note for the entry'),
                 }),
                 execute: async ({ weight, bodyFat, note }: { weight: number; bodyFat?: number; note?: string }) => {
-                    const result = await logWeightDirect({ weight, bodyFat, note });
+                    const result = await logWeightDirect(userId, { weight, bodyFat, note });
                     if (result.success) {
                         return `Successfully logged ${weight}kg for today.`;
                     } else {
