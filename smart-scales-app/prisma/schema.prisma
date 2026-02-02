@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model WeightEntry {
+  id                 Int      @id @default(autoincrement())
+  timestamp          DateTime @unique // Enhance uniqueness constraint to prevent duplicates
+  weight             Float
+  unit               String   @default("kg")
+  bmi                Float?
+  bodyFatPercentage  Float?
+  muscleMass         Float?
+  visceralFat        Float?
+  bodyWaterPercentage Float?
+  boneMass           Float?
+  bmr                Float?
+  bodyType           String?
+  bodyScore          Float?
+  proteinRate        Float?
+  skeletalMuscleRate Float?
+  subcutaneousFat    Float?
+  leanBodyMass       Float?
+  note               String?
+  source             String   @default("old_scale") // "old_scale", "new_scale", "manual"
+  rawData            String?  // Storing JSON as string for SQLite compatibility if needed, or use specific fields
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
