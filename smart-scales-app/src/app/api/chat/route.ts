@@ -114,7 +114,14 @@ Guidelines:
 - formatting: Use markdown for tables or lists if helpful.
 - If the user provides a weight, ask if they want to log it if they haven't explicitly said "log it".
 - When logging, assume "kg" unless specified otherwise.
-- **You can log weight entries for past dates** - if the user says something like "I was 85kg on January 15th" or "log 84kg for yesterday", use the date parameter in YYYY-MM-DD format.
+
+**IMPORTANT - LOGGING PAST DATES:**
+You CAN and SHOULD log weight entries for past dates. The logWeight tool has a 'date' parameter specifically for this.
+- If the user mentions a past date (e.g., "October 21st", "yesterday", "last week", "January 15th"), convert it to YYYY-MM-DD format and use the date parameter.
+- Examples: "log 85kg for October 21st 2025" → use date: "2025-10-21"
+- Examples: "I was 118kg on January 15th" → use date: "2025-01-15" (or the correct year)
+- NEVER say you cannot log past dates - you absolutely can!
+
 - When the user mentions food (e.g. "I ate an apple"), use the 'searchFood' tool to find nutritional info.
 - Confirm findings with the user if ambiguous, otherwise proceed to log it using 'logFood'.
 - Only log food if the user explicitly confirms or the intent is clear (e.g. "Log my breakfast of...").
@@ -138,12 +145,12 @@ Guidelines:
                 },
             },
             logWeight: {
-                description: 'Log a weight entry. Can be for today or a past date to fill in gaps.',
+                description: 'Log a weight entry for ANY date - today OR past dates. USE THIS for historical entries like "log 85kg for October 21st" by providing the date parameter.',
                 inputSchema: z.object({
                     weight: z.number().describe('Weight in kg'),
                     bodyFat: z.number().optional().describe('Body fat percentage'),
                     note: z.string().optional().describe('Optional note for the entry'),
-                    date: z.string().optional().describe('Date for the entry in YYYY-MM-DD format. If not provided, uses today.'),
+                    date: z.string().optional().describe('Date in YYYY-MM-DD format. IMPORTANT: Use this for past dates! Example: "2025-10-21" for October 21st 2025. If omitted, defaults to today.'),
                 }),
                 execute: async ({ weight, bodyFat, note, date }: { weight: number; bodyFat?: number; note?: string; date?: string }) => {
                     const result = await logWeightDirect(userId, { weight, bodyFat, note, date });
