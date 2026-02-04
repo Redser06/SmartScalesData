@@ -3,7 +3,7 @@ import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse/sync';
-import { PrismaClient } from '../src/generated/client/client';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 

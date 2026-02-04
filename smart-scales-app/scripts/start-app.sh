@@ -53,7 +53,14 @@ needs_rebuild() {
 # Check if rebuild is needed
 if needs_rebuild; then
     echo "Changes detected - rebuilding app..."
-    npm run build
+    if ! npm run build; then
+        echo ""
+        echo "ERROR: Build failed! Please check the errors above."
+        echo "Press Enter to exit..."
+        read
+        exit 1
+    fi
+    echo "Build completed successfully."
 else
     echo "Build is up to date."
 fi
