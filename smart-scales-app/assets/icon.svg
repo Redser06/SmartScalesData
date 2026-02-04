@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F46E5"/>
+      <stop offset="100%" style="stop-color:#7C3AED"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main circle background -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGrad)"/>
+
+  <!-- Scale platform (bottom curved line) -->
+  <path d="M120 320 Q256 380 392 320"
+        stroke="white"
+        stroke-width="24"
+        stroke-linecap="round"
+        fill="none"/>
+
+  <!-- Center pillar -->
+  <rect x="244" y="200" width="24" height="120" rx="12" fill="white"/>
+
+  <!-- Weight display circle -->
+  <circle cx="256" cy="160" r="60" fill="white"/>
+
+  <!-- Weight number representation (stylized) -->
+  <text x="256" y="175"
+        font-family="system-ui, -apple-system, sans-serif"
+        font-size="48"
+        font-weight="700"
+        fill="#4F46E5"
+        text-anchor="middle">
+    kg
+  </text>
+
+  <!-- Small decorative dots for digital display effect -->
+  <circle cx="200" cy="280" r="8" fill="white" opacity="0.6"/>
+  <circle cx="312" cy="280" r="8" fill="white" opacity="0.6"/>
+</svg>

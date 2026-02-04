@@ -22,13 +22,21 @@ async function getWeightHistoryDirect(userId: string) {
 }
 
 
-async function logWeightDirect(userId: string, data: { weight: number; note?: string; bodyFat?: number }) {
+async function logWeightDirect(userId: string, data: { weight: number; note?: string; bodyFat?: number; date?: string }) {
     try {
+        // Parse date if provided, otherwise use current date
+        let timestamp = new Date();
+        if (data.date) {
+            timestamp = new Date(data.date);
+            // Set to noon to avoid timezone issues
+            timestamp.setHours(12, 0, 0, 0);
+        }
+
         await prisma.weightEntry.create({
             data: {
                 userId,
                 weight: data.weight,
-                timestamp: new Date(),
+                timestamp,
                 unit: 'kg',
                 note: data.note,
                 bodyFatPercentage: data.bodyFat,
@@ -36,7 +44,7 @@ async function logWeightDirect(userId: string, data: { weight: number; note?: st
             },
         });
         revalidatePath('/');
-        return { success: true };
+        return { success: true, date: timestamp.toLocaleDateString() };
     } catch (error) {
         console.error("Error logging weight:", error);
         return { success: false, error: "Failed to save entry" };
@@ -106,6 +114,7 @@ Guidelines:
 - formatting: Use markdown for tables or lists if helpful.
 - If the user provides a weight, ask if they want to log it if they haven't explicitly said "log it".
 - When logging, assume "kg" unless specified otherwise.
+- **You can log weight entries for past dates** - if the user says something like "I was 85kg on January 15th" or "log 84kg for yesterday", use the date parameter in YYYY-MM-DD format.
 - When the user mentions food (e.g. "I ate an apple"), use the 'searchFood' tool to find nutritional info.
 - Confirm findings with the user if ambiguous, otherwise proceed to log it using 'logFood'.
 - Only log food if the user explicitly confirms or the intent is clear (e.g. "Log my breakfast of...").
@@ -129,16 +138,18 @@ Guidelines:
                 },
             },
             logWeight: {
-                description: 'Log a new weight entry for today',
+                description: 'Log a weight entry. Can be for today or a past date to fill in gaps.',
                 inputSchema: z.object({
                     weight: z.number().describe('Weight in kg'),
                     bodyFat: z.number().optional().describe('Body fat percentage'),
                     note: z.string().optional().describe('Optional note for the entry'),
+                    date: z.string().optional().describe('Date for the entry in YYYY-MM-DD format. If not provided, uses today.'),
                 }),
-                execute: async ({ weight, bodyFat, note }: { weight: number; bodyFat?: number; note?: string }) => {
-                    const result = await logWeightDirect(userId, { weight, bodyFat, note });
+                execute: async ({ weight, bodyFat, note, date }: { weight: number; bodyFat?: number; note?: string; date?: string }) => {
+                    const result = await logWeightDirect(userId, { weight, bodyFat, note, date });
                     if (result.success) {
-                        return `Successfully logged ${weight}kg for today.`;
+                        const dateStr = date ? result.date : 'today';
+                        return `Successfully logged ${weight}kg for ${dateStr}.`;
                     } else {
                         return `Failed to log entry: ${result.error}`;
                     }

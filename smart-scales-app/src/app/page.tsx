@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { useSession, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { getWeightHistory, deleteWeightEntry, importCsvData, getNutritionHistory } from './actions';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { DailyMacrosChart } from '@/components/analytics/DailyMacrosChart';
@@ -48,7 +49,8 @@ const PredictionCard = ({ label, date, value, change }: any) => (
 )
 
 export default function Dashboard() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedEntry, setSelectedEntry] = useState<any>(null);
@@ -90,25 +92,43 @@ export default function Dashboard() {
     }
   };
 
+  // Redirect to login if not authenticated
   useEffect(() => {
-    getWeightHistory().then((history) => {
-      setData(history);
+    if (status === 'unauthenticated') {
+      router.push('/login');
+    }
+  }, [status, router]);
 
-      // Calculate projections based on FULL history trends (usually more accurate to use recent few points)
-      // Here we check if we have enough data
-      if (history.length >= 5) {
-        const trend = calculateTrend(history, 'weight');
-        const proj = getProjections(history, trend);
-        setProjections(proj);
-      }
+  // Fetch data only when authenticated
+  useEffect(() => {
+    if (status !== 'authenticated') return;
 
-      setLoading(false);
-    });
+    getWeightHistory()
+      .then((history) => {
+        setData(history);
 
-    getNutritionHistory().then(nut => {
-      setNutrition(nut);
-    });
-  }, []);
+        // Calculate projections based on FULL history trends
+        if (history.length >= 5) {
+          const trend = calculateTrend(history, 'weight');
+          const proj = getProjections(history, trend);
+          setProjections(proj);
+        }
+
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Failed to load weight history:', error);
+        setLoading(false);
+      });
+
+    getNutritionHistory()
+      .then(nut => {
+        setNutrition(nut);
+      })
+      .catch((error) => {
+        console.error('Failed to load nutrition history:', error);
+      });
+  }, [status]);
 
   const filteredData = useMemo(() => {
     if (timeRange === "all") return data;
@@ -124,7 +144,15 @@ export default function Dashboard() {
     return data.filter(item => isAfter(new Date(item.timestamp), cutoffDate));
   }, [data, timeRange]);
 
-  if (loading) return <div className="min-h-screen bg-black text-white flex items-center justify-center">Loading your journey...</div>;
+  // Show loading while checking auth or fetching data
+  if (status === 'loading' || loading) {
+    return <div className="min-h-screen bg-black text-white flex items-center justify-center">Loading your journey...</div>;
+  }
+
+  // Don't render if not authenticated (will redirect)
+  if (status !== 'authenticated') {
+    return null;
+  }
 
   const currentWeight = data[data.length - 1]?.weight || 0;
   const startWeight = data[0]?.weight || 0;
@@ -142,7 +170,9 @@ export default function Dashboard() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-white mb-2">Smart Scales Tracker</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-white mb-2">
+              Welcome back, {session?.user?.name?.split(' ')[0] || 'there'}
+            </h1>
             <p className="text-zinc-400">Your weight loss journey at a glance.</p>
           </div>
           <div className="flex items-center gap-4">
