@@ -54,7 +54,12 @@ export const ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   PasswordResetToken: 'PasswordResetToken',
-  WeightEntry: 'WeightEntry'
+  WeightEntry: 'WeightEntry',
+  UserJourneyProfile: 'UserJourneyProfile',
+  HistoricAnchor: 'HistoricAnchor',
+  ScaleCalibration: 'ScaleCalibration',
+  ScenarioProposal: 'ScenarioProposal',
+  LlmSpendLedger: 'LlmSpendLedger'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -154,6 +159,9 @@ export const WeightEntryScalarFieldEnum = {
   skeletalMuscleRate: 'skeletalMuscleRate',
   subcutaneousFat: 'subcutaneousFat',
   leanBodyMass: 'leanBodyMass',
+  calibratedWeightKg: 'calibratedWeightKg',
+  calibratedBodyFatPct: 'calibratedBodyFatPct',
+  calibratedMuscleMassKg: 'calibratedMuscleMassKg',
   note: 'note',
   source: 'source',
   rawData: 'rawData',
@@ -163,6 +171,89 @@ export const WeightEntryScalarFieldEnum = {
 } as const
 
 export type WeightEntryScalarFieldEnum = (typeof WeightEntryScalarFieldEnum)[keyof typeof WeightEntryScalarFieldEnum]
+
+
+export const UserJourneyProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  heightCm: 'heightCm',
+  birthYear: 'birthYear',
+  biologicalSex: 'biologicalSex',
+  activityLevel: 'activityLevel',
+  resistanceTrainingDaysWk: 'resistanceTrainingDaysWk',
+  sleepHoursAvg: 'sleepHoursAvg',
+  lifestyleNotes: 'lifestyleNotes',
+  goalType: 'goalType',
+  targetWeightKg: 'targetWeightKg',
+  targetBodyFatPct: 'targetBodyFatPct',
+  targetMuscleMassKg: 'targetMuscleMassKg',
+  targetDate: 'targetDate',
+  preferredWeeklyRatePctBw: 'preferredWeeklyRatePctBw',
+  userOverridesJson: 'userOverridesJson',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserJourneyProfileScalarFieldEnum = (typeof UserJourneyProfileScalarFieldEnum)[keyof typeof UserJourneyProfileScalarFieldEnum]
+
+
+export const HistoricAnchorScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  label: 'label',
+  anchorDate: 'anchorDate',
+  weightKg: 'weightKg',
+  bodyFatPct: 'bodyFatPct',
+  muscleMassKg: 'muscleMassKg',
+  ageAtAnchor: 'ageAtAnchor',
+  lifestyleContext: 'lifestyleContext',
+  origin: 'origin',
+  citationNote: 'citationNote',
+  createdAt: 'createdAt'
+} as const
+
+export type HistoricAnchorScalarFieldEnum = (typeof HistoricAnchorScalarFieldEnum)[keyof typeof HistoricAnchorScalarFieldEnum]
+
+
+export const ScaleCalibrationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sourceSlug: 'sourceSlug',
+  weightOffsetKg: 'weightOffsetKg',
+  bodyFatOffsetPct: 'bodyFatOffsetPct',
+  muscleMassOffsetKg: 'muscleMassOffsetKg',
+  isReferenceScale: 'isReferenceScale'
+} as const
+
+export type ScaleCalibrationScalarFieldEnum = (typeof ScaleCalibrationScalarFieldEnum)[keyof typeof ScaleCalibrationScalarFieldEnum]
+
+
+export const ScenarioProposalScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  kind: 'kind',
+  stateHash: 'stateHash',
+  payloadJson: 'payloadJson',
+  status: 'status',
+  approvalRef: 'approvalRef',
+  createdAt: 'createdAt'
+} as const
+
+export type ScenarioProposalScalarFieldEnum = (typeof ScenarioProposalScalarFieldEnum)[keyof typeof ScenarioProposalScalarFieldEnum]
+
+
+export const LlmSpendLedgerScalarFieldEnum = {
+  id: 'id',
+  monthKey: 'monthKey',
+  userId: 'userId',
+  nodeId: 'nodeId',
+  taskType: 'taskType',
+  tokensIn: 'tokensIn',
+  tokensOut: 'tokensOut',
+  costUsd: 'costUsd',
+  createdAt: 'createdAt'
+} as const
+
+export type LlmSpendLedgerScalarFieldEnum = (typeof LlmSpendLedgerScalarFieldEnum)[keyof typeof LlmSpendLedgerScalarFieldEnum]
 
 
 export const SortOrder = {

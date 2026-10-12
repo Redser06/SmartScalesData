@@ -395,7 +395,12 @@ export const ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   PasswordResetToken: 'PasswordResetToken',
-  WeightEntry: 'WeightEntry'
+  WeightEntry: 'WeightEntry',
+  UserJourneyProfile: 'UserJourneyProfile',
+  HistoricAnchor: 'HistoricAnchor',
+  ScaleCalibration: 'ScaleCalibration',
+  ScenarioProposal: 'ScenarioProposal',
+  LlmSpendLedger: 'LlmSpendLedger'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "passwordResetToken" | "weightEntry"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "passwordResetToken" | "weightEntry" | "userJourneyProfile" | "historicAnchor" | "scaleCalibration" | "scenarioProposal" | "llmSpendLedger"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -859,6 +864,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserJourneyProfile: {
+      payload: Prisma.$UserJourneyProfilePayload<ExtArgs>
+      fields: Prisma.UserJourneyProfileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserJourneyProfileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserJourneyProfileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>
+        }
+        findFirst: {
+          args: Prisma.UserJourneyProfileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserJourneyProfileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>
+        }
+        findMany: {
+          args: Prisma.UserJourneyProfileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>[]
+        }
+        create: {
+          args: Prisma.UserJourneyProfileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>
+        }
+        createMany: {
+          args: Prisma.UserJourneyProfileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserJourneyProfileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>[]
+        }
+        delete: {
+          args: Prisma.UserJourneyProfileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>
+        }
+        update: {
+          args: Prisma.UserJourneyProfileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>
+        }
+        deleteMany: {
+          args: Prisma.UserJourneyProfileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserJourneyProfileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserJourneyProfileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>[]
+        }
+        upsert: {
+          args: Prisma.UserJourneyProfileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserJourneyProfilePayload>
+        }
+        aggregate: {
+          args: Prisma.UserJourneyProfileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserJourneyProfile>
+        }
+        groupBy: {
+          args: Prisma.UserJourneyProfileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserJourneyProfileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserJourneyProfileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserJourneyProfileCountAggregateOutputType> | number
+        }
+      }
+    }
+    HistoricAnchor: {
+      payload: Prisma.$HistoricAnchorPayload<ExtArgs>
+      fields: Prisma.HistoricAnchorFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HistoricAnchorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HistoricAnchorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>
+        }
+        findFirst: {
+          args: Prisma.HistoricAnchorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HistoricAnchorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>
+        }
+        findMany: {
+          args: Prisma.HistoricAnchorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>[]
+        }
+        create: {
+          args: Prisma.HistoricAnchorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>
+        }
+        createMany: {
+          args: Prisma.HistoricAnchorCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HistoricAnchorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>[]
+        }
+        delete: {
+          args: Prisma.HistoricAnchorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>
+        }
+        update: {
+          args: Prisma.HistoricAnchorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>
+        }
+        deleteMany: {
+          args: Prisma.HistoricAnchorDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HistoricAnchorUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HistoricAnchorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>[]
+        }
+        upsert: {
+          args: Prisma.HistoricAnchorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoricAnchorPayload>
+        }
+        aggregate: {
+          args: Prisma.HistoricAnchorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHistoricAnchor>
+        }
+        groupBy: {
+          args: Prisma.HistoricAnchorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HistoricAnchorGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HistoricAnchorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HistoricAnchorCountAggregateOutputType> | number
+        }
+      }
+    }
+    ScaleCalibration: {
+      payload: Prisma.$ScaleCalibrationPayload<ExtArgs>
+      fields: Prisma.ScaleCalibrationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ScaleCalibrationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ScaleCalibrationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>
+        }
+        findFirst: {
+          args: Prisma.ScaleCalibrationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ScaleCalibrationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>
+        }
+        findMany: {
+          args: Prisma.ScaleCalibrationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>[]
+        }
+        create: {
+          args: Prisma.ScaleCalibrationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>
+        }
+        createMany: {
+          args: Prisma.ScaleCalibrationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ScaleCalibrationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>[]
+        }
+        delete: {
+          args: Prisma.ScaleCalibrationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>
+        }
+        update: {
+          args: Prisma.ScaleCalibrationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>
+        }
+        deleteMany: {
+          args: Prisma.ScaleCalibrationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ScaleCalibrationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ScaleCalibrationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>[]
+        }
+        upsert: {
+          args: Prisma.ScaleCalibrationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScaleCalibrationPayload>
+        }
+        aggregate: {
+          args: Prisma.ScaleCalibrationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateScaleCalibration>
+        }
+        groupBy: {
+          args: Prisma.ScaleCalibrationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScaleCalibrationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ScaleCalibrationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScaleCalibrationCountAggregateOutputType> | number
+        }
+      }
+    }
+    ScenarioProposal: {
+      payload: Prisma.$ScenarioProposalPayload<ExtArgs>
+      fields: Prisma.ScenarioProposalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ScenarioProposalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ScenarioProposalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>
+        }
+        findFirst: {
+          args: Prisma.ScenarioProposalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ScenarioProposalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>
+        }
+        findMany: {
+          args: Prisma.ScenarioProposalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>[]
+        }
+        create: {
+          args: Prisma.ScenarioProposalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>
+        }
+        createMany: {
+          args: Prisma.ScenarioProposalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ScenarioProposalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>[]
+        }
+        delete: {
+          args: Prisma.ScenarioProposalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>
+        }
+        update: {
+          args: Prisma.ScenarioProposalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>
+        }
+        deleteMany: {
+          args: Prisma.ScenarioProposalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ScenarioProposalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ScenarioProposalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>[]
+        }
+        upsert: {
+          args: Prisma.ScenarioProposalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScenarioProposalPayload>
+        }
+        aggregate: {
+          args: Prisma.ScenarioProposalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateScenarioProposal>
+        }
+        groupBy: {
+          args: Prisma.ScenarioProposalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScenarioProposalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ScenarioProposalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScenarioProposalCountAggregateOutputType> | number
+        }
+      }
+    }
+    LlmSpendLedger: {
+      payload: Prisma.$LlmSpendLedgerPayload<ExtArgs>
+      fields: Prisma.LlmSpendLedgerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LlmSpendLedgerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LlmSpendLedgerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>
+        }
+        findFirst: {
+          args: Prisma.LlmSpendLedgerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LlmSpendLedgerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>
+        }
+        findMany: {
+          args: Prisma.LlmSpendLedgerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>[]
+        }
+        create: {
+          args: Prisma.LlmSpendLedgerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>
+        }
+        createMany: {
+          args: Prisma.LlmSpendLedgerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LlmSpendLedgerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>[]
+        }
+        delete: {
+          args: Prisma.LlmSpendLedgerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>
+        }
+        update: {
+          args: Prisma.LlmSpendLedgerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>
+        }
+        deleteMany: {
+          args: Prisma.LlmSpendLedgerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LlmSpendLedgerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LlmSpendLedgerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>[]
+        }
+        upsert: {
+          args: Prisma.LlmSpendLedgerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LlmSpendLedgerPayload>
+        }
+        aggregate: {
+          args: Prisma.LlmSpendLedgerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLlmSpendLedger>
+        }
+        groupBy: {
+          args: Prisma.LlmSpendLedgerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LlmSpendLedgerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LlmSpendLedgerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LlmSpendLedgerCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -979,6 +1354,9 @@ export const WeightEntryScalarFieldEnum = {
   skeletalMuscleRate: 'skeletalMuscleRate',
   subcutaneousFat: 'subcutaneousFat',
   leanBodyMass: 'leanBodyMass',
+  calibratedWeightKg: 'calibratedWeightKg',
+  calibratedBodyFatPct: 'calibratedBodyFatPct',
+  calibratedMuscleMassKg: 'calibratedMuscleMassKg',
   note: 'note',
   source: 'source',
   rawData: 'rawData',
@@ -988,6 +1366,89 @@ export const WeightEntryScalarFieldEnum = {
 } as const
 
 export type WeightEntryScalarFieldEnum = (typeof WeightEntryScalarFieldEnum)[keyof typeof WeightEntryScalarFieldEnum]
+
+
+export const UserJourneyProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  heightCm: 'heightCm',
+  birthYear: 'birthYear',
+  biologicalSex: 'biologicalSex',
+  activityLevel: 'activityLevel',
+  resistanceTrainingDaysWk: 'resistanceTrainingDaysWk',
+  sleepHoursAvg: 'sleepHoursAvg',
+  lifestyleNotes: 'lifestyleNotes',
+  goalType: 'goalType',
+  targetWeightKg: 'targetWeightKg',
+  targetBodyFatPct: 'targetBodyFatPct',
+  targetMuscleMassKg: 'targetMuscleMassKg',
+  targetDate: 'targetDate',
+  preferredWeeklyRatePctBw: 'preferredWeeklyRatePctBw',
+  userOverridesJson: 'userOverridesJson',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserJourneyProfileScalarFieldEnum = (typeof UserJourneyProfileScalarFieldEnum)[keyof typeof UserJourneyProfileScalarFieldEnum]
+
+
+export const HistoricAnchorScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  label: 'label',
+  anchorDate: 'anchorDate',
+  weightKg: 'weightKg',
+  bodyFatPct: 'bodyFatPct',
+  muscleMassKg: 'muscleMassKg',
+  ageAtAnchor: 'ageAtAnchor',
+  lifestyleContext: 'lifestyleContext',
+  origin: 'origin',
+  citationNote: 'citationNote',
+  createdAt: 'createdAt'
+} as const
+
+export type HistoricAnchorScalarFieldEnum = (typeof HistoricAnchorScalarFieldEnum)[keyof typeof HistoricAnchorScalarFieldEnum]
+
+
+export const ScaleCalibrationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sourceSlug: 'sourceSlug',
+  weightOffsetKg: 'weightOffsetKg',
+  bodyFatOffsetPct: 'bodyFatOffsetPct',
+  muscleMassOffsetKg: 'muscleMassOffsetKg',
+  isReferenceScale: 'isReferenceScale'
+} as const
+
+export type ScaleCalibrationScalarFieldEnum = (typeof ScaleCalibrationScalarFieldEnum)[keyof typeof ScaleCalibrationScalarFieldEnum]
+
+
+export const ScenarioProposalScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  kind: 'kind',
+  stateHash: 'stateHash',
+  payloadJson: 'payloadJson',
+  status: 'status',
+  approvalRef: 'approvalRef',
+  createdAt: 'createdAt'
+} as const
+
+export type ScenarioProposalScalarFieldEnum = (typeof ScenarioProposalScalarFieldEnum)[keyof typeof ScenarioProposalScalarFieldEnum]
+
+
+export const LlmSpendLedgerScalarFieldEnum = {
+  id: 'id',
+  monthKey: 'monthKey',
+  userId: 'userId',
+  nodeId: 'nodeId',
+  taskType: 'taskType',
+  tokensIn: 'tokensIn',
+  tokensOut: 'tokensOut',
+  costUsd: 'costUsd',
+  createdAt: 'createdAt'
+} as const
+
+export type LlmSpendLedgerScalarFieldEnum = (typeof LlmSpendLedgerScalarFieldEnum)[keyof typeof LlmSpendLedgerScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1037,6 +1498,13 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 /**
@@ -1132,6 +1600,11 @@ export type GlobalOmitConfig = {
   verificationToken?: Prisma.VerificationTokenOmit
   passwordResetToken?: Prisma.PasswordResetTokenOmit
   weightEntry?: Prisma.WeightEntryOmit
+  userJourneyProfile?: Prisma.UserJourneyProfileOmit
+  historicAnchor?: Prisma.HistoricAnchorOmit
+  scaleCalibration?: Prisma.ScaleCalibrationOmit
+  scenarioProposal?: Prisma.ScenarioProposalOmit
+  llmSpendLedger?: Prisma.LlmSpendLedgerOmit
 }
 
 /* Types for Logging */

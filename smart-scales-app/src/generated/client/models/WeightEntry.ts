@@ -41,6 +41,9 @@ export type WeightEntryAvgAggregateOutputType = {
   skeletalMuscleRate: number | null
   subcutaneousFat: number | null
   leanBodyMass: number | null
+  calibratedWeightKg: number | null
+  calibratedBodyFatPct: number | null
+  calibratedMuscleMassKg: number | null
 }
 
 export type WeightEntrySumAggregateOutputType = {
@@ -58,6 +61,9 @@ export type WeightEntrySumAggregateOutputType = {
   skeletalMuscleRate: number | null
   subcutaneousFat: number | null
   leanBodyMass: number | null
+  calibratedWeightKg: number | null
+  calibratedBodyFatPct: number | null
+  calibratedMuscleMassKg: number | null
 }
 
 export type WeightEntryMinAggregateOutputType = {
@@ -78,6 +84,9 @@ export type WeightEntryMinAggregateOutputType = {
   skeletalMuscleRate: number | null
   subcutaneousFat: number | null
   leanBodyMass: number | null
+  calibratedWeightKg: number | null
+  calibratedBodyFatPct: number | null
+  calibratedMuscleMassKg: number | null
   note: string | null
   source: string | null
   rawData: string | null
@@ -104,6 +113,9 @@ export type WeightEntryMaxAggregateOutputType = {
   skeletalMuscleRate: number | null
   subcutaneousFat: number | null
   leanBodyMass: number | null
+  calibratedWeightKg: number | null
+  calibratedBodyFatPct: number | null
+  calibratedMuscleMassKg: number | null
   note: string | null
   source: string | null
   rawData: string | null
@@ -130,6 +142,9 @@ export type WeightEntryCountAggregateOutputType = {
   skeletalMuscleRate: number
   subcutaneousFat: number
   leanBodyMass: number
+  calibratedWeightKg: number
+  calibratedBodyFatPct: number
+  calibratedMuscleMassKg: number
   note: number
   source: number
   rawData: number
@@ -155,6 +170,9 @@ export type WeightEntryAvgAggregateInputType = {
   skeletalMuscleRate?: true
   subcutaneousFat?: true
   leanBodyMass?: true
+  calibratedWeightKg?: true
+  calibratedBodyFatPct?: true
+  calibratedMuscleMassKg?: true
 }
 
 export type WeightEntrySumAggregateInputType = {
@@ -172,6 +190,9 @@ export type WeightEntrySumAggregateInputType = {
   skeletalMuscleRate?: true
   subcutaneousFat?: true
   leanBodyMass?: true
+  calibratedWeightKg?: true
+  calibratedBodyFatPct?: true
+  calibratedMuscleMassKg?: true
 }
 
 export type WeightEntryMinAggregateInputType = {
@@ -192,6 +213,9 @@ export type WeightEntryMinAggregateInputType = {
   skeletalMuscleRate?: true
   subcutaneousFat?: true
   leanBodyMass?: true
+  calibratedWeightKg?: true
+  calibratedBodyFatPct?: true
+  calibratedMuscleMassKg?: true
   note?: true
   source?: true
   rawData?: true
@@ -218,6 +242,9 @@ export type WeightEntryMaxAggregateInputType = {
   skeletalMuscleRate?: true
   subcutaneousFat?: true
   leanBodyMass?: true
+  calibratedWeightKg?: true
+  calibratedBodyFatPct?: true
+  calibratedMuscleMassKg?: true
   note?: true
   source?: true
   rawData?: true
@@ -244,6 +271,9 @@ export type WeightEntryCountAggregateInputType = {
   skeletalMuscleRate?: true
   subcutaneousFat?: true
   leanBodyMass?: true
+  calibratedWeightKg?: true
+  calibratedBodyFatPct?: true
+  calibratedMuscleMassKg?: true
   note?: true
   source?: true
   rawData?: true
@@ -357,6 +387,9 @@ export type WeightEntryGroupByOutputType = {
   skeletalMuscleRate: number | null
   subcutaneousFat: number | null
   leanBodyMass: number | null
+  calibratedWeightKg: number | null
+  calibratedBodyFatPct: number | null
+  calibratedMuscleMassKg: number | null
   note: string | null
   source: string
   rawData: string | null
@@ -406,6 +439,9 @@ export type WeightEntryWhereInput = {
   skeletalMuscleRate?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   subcutaneousFat?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   leanBodyMass?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedWeightKg?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedBodyFatPct?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedMuscleMassKg?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   note?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
   source?: Prisma.StringFilter<"WeightEntry"> | string
   rawData?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
@@ -433,6 +469,9 @@ export type WeightEntryOrderByWithRelationInput = {
   skeletalMuscleRate?: Prisma.SortOrderInput | Prisma.SortOrder
   subcutaneousFat?: Prisma.SortOrderInput | Prisma.SortOrder
   leanBodyMass?: Prisma.SortOrderInput | Prisma.SortOrder
+  calibratedWeightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  calibratedBodyFatPct?: Prisma.SortOrderInput | Prisma.SortOrder
+  calibratedMuscleMassKg?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -444,6 +483,7 @@ export type WeightEntryOrderByWithRelationInput = {
 
 export type WeightEntryWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  userId_timestamp?: Prisma.WeightEntryUserIdTimestampCompoundUniqueInput
   AND?: Prisma.WeightEntryWhereInput | Prisma.WeightEntryWhereInput[]
   OR?: Prisma.WeightEntryWhereInput[]
   NOT?: Prisma.WeightEntryWhereInput | Prisma.WeightEntryWhereInput[]
@@ -463,6 +503,9 @@ export type WeightEntryWhereUniqueInput = Prisma.AtLeast<{
   skeletalMuscleRate?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   subcutaneousFat?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   leanBodyMass?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedWeightKg?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedBodyFatPct?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedMuscleMassKg?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   note?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
   source?: Prisma.StringFilter<"WeightEntry"> | string
   rawData?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
@@ -470,7 +513,7 @@ export type WeightEntryWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id">
+}, "id" | "userId_timestamp">
 
 export type WeightEntryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -490,6 +533,9 @@ export type WeightEntryOrderByWithAggregationInput = {
   skeletalMuscleRate?: Prisma.SortOrderInput | Prisma.SortOrder
   subcutaneousFat?: Prisma.SortOrderInput | Prisma.SortOrder
   leanBodyMass?: Prisma.SortOrderInput | Prisma.SortOrder
+  calibratedWeightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  calibratedBodyFatPct?: Prisma.SortOrderInput | Prisma.SortOrder
+  calibratedMuscleMassKg?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -524,6 +570,9 @@ export type WeightEntryScalarWhereWithAggregatesInput = {
   skeletalMuscleRate?: Prisma.FloatNullableWithAggregatesFilter<"WeightEntry"> | number | null
   subcutaneousFat?: Prisma.FloatNullableWithAggregatesFilter<"WeightEntry"> | number | null
   leanBodyMass?: Prisma.FloatNullableWithAggregatesFilter<"WeightEntry"> | number | null
+  calibratedWeightKg?: Prisma.FloatNullableWithAggregatesFilter<"WeightEntry"> | number | null
+  calibratedBodyFatPct?: Prisma.FloatNullableWithAggregatesFilter<"WeightEntry"> | number | null
+  calibratedMuscleMassKg?: Prisma.FloatNullableWithAggregatesFilter<"WeightEntry"> | number | null
   note?: Prisma.StringNullableWithAggregatesFilter<"WeightEntry"> | string | null
   source?: Prisma.StringWithAggregatesFilter<"WeightEntry"> | string
   rawData?: Prisma.StringNullableWithAggregatesFilter<"WeightEntry"> | string | null
@@ -549,6 +598,9 @@ export type WeightEntryCreateInput = {
   skeletalMuscleRate?: number | null
   subcutaneousFat?: number | null
   leanBodyMass?: number | null
+  calibratedWeightKg?: number | null
+  calibratedBodyFatPct?: number | null
+  calibratedMuscleMassKg?: number | null
   note?: string | null
   source?: string
   rawData?: string | null
@@ -575,6 +627,9 @@ export type WeightEntryUncheckedCreateInput = {
   skeletalMuscleRate?: number | null
   subcutaneousFat?: number | null
   leanBodyMass?: number | null
+  calibratedWeightKg?: number | null
+  calibratedBodyFatPct?: number | null
+  calibratedMuscleMassKg?: number | null
   note?: string | null
   source?: string
   rawData?: string | null
@@ -600,6 +655,9 @@ export type WeightEntryUpdateInput = {
   skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedWeightKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedBodyFatPct?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedMuscleMassKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -626,6 +684,9 @@ export type WeightEntryUncheckedUpdateInput = {
   skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedWeightKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedBodyFatPct?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedMuscleMassKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -652,6 +713,9 @@ export type WeightEntryCreateManyInput = {
   skeletalMuscleRate?: number | null
   subcutaneousFat?: number | null
   leanBodyMass?: number | null
+  calibratedWeightKg?: number | null
+  calibratedBodyFatPct?: number | null
+  calibratedMuscleMassKg?: number | null
   note?: string | null
   source?: string
   rawData?: string | null
@@ -677,6 +741,9 @@ export type WeightEntryUpdateManyMutationInput = {
   skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedWeightKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedBodyFatPct?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedMuscleMassKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -702,6 +769,9 @@ export type WeightEntryUncheckedUpdateManyInput = {
   skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedWeightKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedBodyFatPct?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedMuscleMassKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -718,6 +788,11 @@ export type WeightEntryListRelationFilter = {
 
 export type WeightEntryOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type WeightEntryUserIdTimestampCompoundUniqueInput = {
+  userId: string
+  timestamp: Date | string
 }
 
 export type WeightEntryCountOrderByAggregateInput = {
@@ -738,6 +813,9 @@ export type WeightEntryCountOrderByAggregateInput = {
   skeletalMuscleRate?: Prisma.SortOrder
   subcutaneousFat?: Prisma.SortOrder
   leanBodyMass?: Prisma.SortOrder
+  calibratedWeightKg?: Prisma.SortOrder
+  calibratedBodyFatPct?: Prisma.SortOrder
+  calibratedMuscleMassKg?: Prisma.SortOrder
   note?: Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrder
@@ -761,6 +839,9 @@ export type WeightEntryAvgOrderByAggregateInput = {
   skeletalMuscleRate?: Prisma.SortOrder
   subcutaneousFat?: Prisma.SortOrder
   leanBodyMass?: Prisma.SortOrder
+  calibratedWeightKg?: Prisma.SortOrder
+  calibratedBodyFatPct?: Prisma.SortOrder
+  calibratedMuscleMassKg?: Prisma.SortOrder
 }
 
 export type WeightEntryMaxOrderByAggregateInput = {
@@ -781,6 +862,9 @@ export type WeightEntryMaxOrderByAggregateInput = {
   skeletalMuscleRate?: Prisma.SortOrder
   subcutaneousFat?: Prisma.SortOrder
   leanBodyMass?: Prisma.SortOrder
+  calibratedWeightKg?: Prisma.SortOrder
+  calibratedBodyFatPct?: Prisma.SortOrder
+  calibratedMuscleMassKg?: Prisma.SortOrder
   note?: Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrder
@@ -807,6 +891,9 @@ export type WeightEntryMinOrderByAggregateInput = {
   skeletalMuscleRate?: Prisma.SortOrder
   subcutaneousFat?: Prisma.SortOrder
   leanBodyMass?: Prisma.SortOrder
+  calibratedWeightKg?: Prisma.SortOrder
+  calibratedBodyFatPct?: Prisma.SortOrder
+  calibratedMuscleMassKg?: Prisma.SortOrder
   note?: Prisma.SortOrder
   source?: Prisma.SortOrder
   rawData?: Prisma.SortOrder
@@ -830,6 +917,9 @@ export type WeightEntrySumOrderByAggregateInput = {
   skeletalMuscleRate?: Prisma.SortOrder
   subcutaneousFat?: Prisma.SortOrder
   leanBodyMass?: Prisma.SortOrder
+  calibratedWeightKg?: Prisma.SortOrder
+  calibratedBodyFatPct?: Prisma.SortOrder
+  calibratedMuscleMassKg?: Prisma.SortOrder
 }
 
 export type WeightEntryCreateNestedManyWithoutUserInput = {
@@ -915,6 +1005,9 @@ export type WeightEntryCreateWithoutUserInput = {
   skeletalMuscleRate?: number | null
   subcutaneousFat?: number | null
   leanBodyMass?: number | null
+  calibratedWeightKg?: number | null
+  calibratedBodyFatPct?: number | null
+  calibratedMuscleMassKg?: number | null
   note?: string | null
   source?: string
   rawData?: string | null
@@ -940,6 +1033,9 @@ export type WeightEntryUncheckedCreateWithoutUserInput = {
   skeletalMuscleRate?: number | null
   subcutaneousFat?: number | null
   leanBodyMass?: number | null
+  calibratedWeightKg?: number | null
+  calibratedBodyFatPct?: number | null
+  calibratedMuscleMassKg?: number | null
   note?: string | null
   source?: string
   rawData?: string | null
@@ -993,6 +1089,9 @@ export type WeightEntryScalarWhereInput = {
   skeletalMuscleRate?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   subcutaneousFat?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   leanBodyMass?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedWeightKg?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedBodyFatPct?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
+  calibratedMuscleMassKg?: Prisma.FloatNullableFilter<"WeightEntry"> | number | null
   note?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
   source?: Prisma.StringFilter<"WeightEntry"> | string
   rawData?: Prisma.StringNullableFilter<"WeightEntry"> | string | null
@@ -1019,6 +1118,9 @@ export type WeightEntryCreateManyUserInput = {
   skeletalMuscleRate?: number | null
   subcutaneousFat?: number | null
   leanBodyMass?: number | null
+  calibratedWeightKg?: number | null
+  calibratedBodyFatPct?: number | null
+  calibratedMuscleMassKg?: number | null
   note?: string | null
   source?: string
   rawData?: string | null
@@ -1043,6 +1145,9 @@ export type WeightEntryUpdateWithoutUserInput = {
   skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedWeightKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedBodyFatPct?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedMuscleMassKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1068,6 +1173,9 @@ export type WeightEntryUncheckedUpdateWithoutUserInput = {
   skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedWeightKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedBodyFatPct?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedMuscleMassKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1093,6 +1201,9 @@ export type WeightEntryUncheckedUpdateManyWithoutUserInput = {
   skeletalMuscleRate?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcutaneousFat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   leanBodyMass?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedWeightKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedBodyFatPct?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  calibratedMuscleMassKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.StringFieldUpdateOperationsInput | string
   rawData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1120,6 +1231,9 @@ export type WeightEntrySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   skeletalMuscleRate?: boolean
   subcutaneousFat?: boolean
   leanBodyMass?: boolean
+  calibratedWeightKg?: boolean
+  calibratedBodyFatPct?: boolean
+  calibratedMuscleMassKg?: boolean
   note?: boolean
   source?: boolean
   rawData?: boolean
@@ -1147,6 +1261,9 @@ export type WeightEntrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   skeletalMuscleRate?: boolean
   subcutaneousFat?: boolean
   leanBodyMass?: boolean
+  calibratedWeightKg?: boolean
+  calibratedBodyFatPct?: boolean
+  calibratedMuscleMassKg?: boolean
   note?: boolean
   source?: boolean
   rawData?: boolean
@@ -1174,6 +1291,9 @@ export type WeightEntrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   skeletalMuscleRate?: boolean
   subcutaneousFat?: boolean
   leanBodyMass?: boolean
+  calibratedWeightKg?: boolean
+  calibratedBodyFatPct?: boolean
+  calibratedMuscleMassKg?: boolean
   note?: boolean
   source?: boolean
   rawData?: boolean
@@ -1201,6 +1321,9 @@ export type WeightEntrySelectScalar = {
   skeletalMuscleRate?: boolean
   subcutaneousFat?: boolean
   leanBodyMass?: boolean
+  calibratedWeightKg?: boolean
+  calibratedBodyFatPct?: boolean
+  calibratedMuscleMassKg?: boolean
   note?: boolean
   source?: boolean
   rawData?: boolean
@@ -1209,7 +1332,7 @@ export type WeightEntrySelectScalar = {
   updatedAt?: boolean
 }
 
-export type WeightEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "timestamp" | "weight" | "unit" | "bmi" | "bodyFatPercentage" | "muscleMass" | "visceralFat" | "bodyWaterPercentage" | "boneMass" | "bmr" | "bodyType" | "bodyScore" | "proteinRate" | "skeletalMuscleRate" | "subcutaneousFat" | "leanBodyMass" | "note" | "source" | "rawData" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["weightEntry"]>
+export type WeightEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "timestamp" | "weight" | "unit" | "bmi" | "bodyFatPercentage" | "muscleMass" | "visceralFat" | "bodyWaterPercentage" | "boneMass" | "bmr" | "bodyType" | "bodyScore" | "proteinRate" | "skeletalMuscleRate" | "subcutaneousFat" | "leanBodyMass" | "calibratedWeightKg" | "calibratedBodyFatPct" | "calibratedMuscleMassKg" | "note" | "source" | "rawData" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["weightEntry"]>
 export type WeightEntryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.WeightEntry$userArgs<ExtArgs>
 }
@@ -1243,6 +1366,9 @@ export type $WeightEntryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     skeletalMuscleRate: number | null
     subcutaneousFat: number | null
     leanBodyMass: number | null
+    calibratedWeightKg: number | null
+    calibratedBodyFatPct: number | null
+    calibratedMuscleMassKg: number | null
     note: string | null
     source: string
     rawData: string | null
@@ -1690,6 +1816,9 @@ export interface WeightEntryFieldRefs {
   readonly skeletalMuscleRate: Prisma.FieldRef<"WeightEntry", 'Float'>
   readonly subcutaneousFat: Prisma.FieldRef<"WeightEntry", 'Float'>
   readonly leanBodyMass: Prisma.FieldRef<"WeightEntry", 'Float'>
+  readonly calibratedWeightKg: Prisma.FieldRef<"WeightEntry", 'Float'>
+  readonly calibratedBodyFatPct: Prisma.FieldRef<"WeightEntry", 'Float'>
+  readonly calibratedMuscleMassKg: Prisma.FieldRef<"WeightEntry", 'Float'>
   readonly note: Prisma.FieldRef<"WeightEntry", 'String'>
   readonly source: Prisma.FieldRef<"WeightEntry", 'String'>
   readonly rawData: Prisma.FieldRef<"WeightEntry", 'String'>

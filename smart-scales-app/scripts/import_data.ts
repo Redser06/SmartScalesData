@@ -33,7 +33,7 @@ async function main() {
 
     let importedCount = 0;
 
-    for (const record of records as any[]) {
+    for (const record of records as Record<string, string>[]) {
         // Map fields
         // Time format: 28-01-2026 09:02:59
         const [datePart, timePart] = record['Time'].split(' ');
@@ -71,8 +71,9 @@ async function main() {
                 }
             });
             importedCount++;
-        } catch (e: any) {
-            if (e.code === 'P2002') {
+        } catch (e: unknown) {
+            const err = e as { code?: string };
+            if (err.code === 'P2002') {
                 console.log(`Skipping duplicate entry for ${timestamp.toISOString()}`);
             } else {
                 console.error(`Error importing record ${record['Time']}:`, e);

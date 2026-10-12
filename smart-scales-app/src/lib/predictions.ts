@@ -1,67 +1,86 @@
+import { addDays } from 'date-fns';
+import {
+  aggregateDailyEntries,
+  computeDampedMeanWeight,
+  computeEwmaSeries,
+  computeTheilSenDailySlope,
+} from '@/lib/trajectory-engine';
+import type { RawScaleEntry } from '@/lib/scale-calibrator';
 
-import { addDays } from "date-fns";
-
-export function calculateTrend(data: any[], metric: string = 'weight') {
-    if (data.length < 2) return null;
-
-    // Use last 5 data points
-    const recentData = data.slice(-5);
-
-    // Simple linear regression: y = mx + c
-    // x = days from start of window
-    // y = metric value
-
-    const n = recentData.length;
-    let sumX = 0;
-    let sumY = 0;
-    let sumXY = 0;
-    let sumXX = 0;
-
-    const startDate = new Date(recentData[0].timestamp).getTime();
-
-    const points = recentData.map(d => {
-        const x = (new Date(d.timestamp).getTime() - startDate) / (1000 * 60 * 60 * 24); // days
-        const y = d[metric];
-        return { x, y };
-    });
-
-    for (const p of points) {
-        sumX += p.x;
-        sumY += p.y;
-        sumXY += p.x * p.y;
-        sumXX += p.x * p.x;
-    }
-
-    const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-    const intercept = (sumY - slope * sumX) / n;
-
-    // Current last point time difference from start window
-    const lastPointX = points[points.length - 1].x;
-
-    return { slope, intercept, startDate, lastPointX, lastValue: recentData[recentData.length - 1][metric] };
+export interface LegacyTrendSummary {
+  slope: number;
+  intercept: number;
+  startDate: number;
+  lastPointX: number;
+  lastValue: number;
 }
 
-export function getProjections(data: any[], trend: any) {
-    if (!trend) return [];
+export interface LegacyProjectionPoint {
+  label: string;
+  date: Date;
+  value: number;
+  change: number;
+}
 
-    const { slope, intercept, startDate, lastPointX, lastValue } = trend;
-    const lastDate = new Date(data[data.length - 1].timestamp);
+/**
+ * Backward-compatible wrapper around trajectory-engine.ts
+ */
+export function calculateTrend(
+  data: Array<Record<string, unknown>>,
+  metric = 'weight'
+): LegacyTrendSummary | null {
+  if (!data || data.length < 2) return null;
 
-    const projections = [
-        { label: '1 Week', days: 7 },
-        { label: '4 Weeks', days: 28 },
-        { label: '3 Months', days: 90 },
-    ];
+  const mapped: RawScaleEntry[] = data.map((d, idx) => ({
+    id: typeof d.id === 'number' ? d.id : idx + 1,
+    timestamp: (d.timestamp as Date | string) ?? new Date().toISOString(),
+    weight: Number(d[metric] ?? d.weight ?? 0),
+    source: typeof d.source === 'string' ? d.source : 'old_scale',
+  }));
 
-    return projections.map(p => {
-        const futureDate = addDays(lastDate, p.days);
-        const totalDaysX = (futureDate.getTime() - startDate) / (1000 * 60 * 60 * 24);
-        const predictedValue = slope * totalDaysX + intercept;
-        return {
-            label: p.label,
-            date: futureDate,
-            value: predictedValue,
-            change: predictedValue - lastValue
-        };
-    });
+  const daily = aggregateDailyEntries(mapped);
+  if (daily.length < 2) return null;
+
+  const ewma = computeEwmaSeries(daily);
+  const slope = computeTheilSenDailySlope(daily, ewma);
+  const startDate = daily[0].dayMs;
+  const lastDay = daily[daily.length - 1];
+  const lastEwma = ewma[ewma.length - 1].ewmaWeightKg;
+  const lastPointX = (lastDay.dayMs - startDate) / (1000 * 60 * 60 * 24);
+  const intercept = lastEwma - slope * lastPointX;
+
+  return {
+    slope,
+    intercept,
+    startDate,
+    lastPointX,
+    lastValue: lastEwma,
+  };
+}
+
+export function getProjections(
+  data: Array<Record<string, unknown>>,
+  trend: LegacyTrendSummary | null
+): LegacyProjectionPoint[] {
+  if (!trend || !data || data.length === 0) return [];
+
+  const lastRawTs = data[data.length - 1].timestamp as Date | string;
+  const lastDate = new Date(lastRawTs);
+
+  const projections = [
+    { label: '1 Week', days: 7 },
+    { label: '4 Weeks', days: 28 },
+    { label: '3 Months', days: 90 },
+  ];
+
+  return projections.map((p) => {
+    const futureDate = addDays(lastDate, p.days);
+    const predictedValue = computeDampedMeanWeight(trend.lastValue, trend.slope, p.days);
+    return {
+      label: p.label,
+      date: futureDate,
+      value: predictedValue,
+      change: predictedValue - trend.lastValue,
+    };
+  });
 }

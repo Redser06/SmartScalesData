@@ -209,6 +209,10 @@ export type UserWhereInput = {
   accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   weightEntries?: Prisma.WeightEntryListRelationFilter
+  journeyProfile?: Prisma.XOR<Prisma.UserJourneyProfileNullableScalarRelationFilter, Prisma.UserJourneyProfileWhereInput> | null
+  historicAnchors?: Prisma.HistoricAnchorListRelationFilter
+  scaleCalibrations?: Prisma.ScaleCalibrationListRelationFilter
+  proposals?: Prisma.ScenarioProposalListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -223,6 +227,10 @@ export type UserOrderByWithRelationInput = {
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   weightEntries?: Prisma.WeightEntryOrderByRelationAggregateInput
+  journeyProfile?: Prisma.UserJourneyProfileOrderByWithRelationInput
+  historicAnchors?: Prisma.HistoricAnchorOrderByRelationAggregateInput
+  scaleCalibrations?: Prisma.ScaleCalibrationOrderByRelationAggregateInput
+  proposals?: Prisma.ScenarioProposalOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -240,6 +248,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   weightEntries?: Prisma.WeightEntryListRelationFilter
+  journeyProfile?: Prisma.XOR<Prisma.UserJourneyProfileNullableScalarRelationFilter, Prisma.UserJourneyProfileWhereInput> | null
+  historicAnchors?: Prisma.HistoricAnchorListRelationFilter
+  scaleCalibrations?: Prisma.ScaleCalibrationListRelationFilter
+  proposals?: Prisma.ScenarioProposalListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -282,6 +294,10 @@ export type UserCreateInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -296,6 +312,10 @@ export type UserUncheckedCreateInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -310,6 +330,10 @@ export type UserUpdateInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -324,6 +348,10 @@ export type UserUncheckedUpdateInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -462,6 +490,62 @@ export type UserUpdateOneWithoutWeightEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWeightEntriesInput, Prisma.UserUpdateWithoutWeightEntriesInput>, Prisma.UserUncheckedUpdateWithoutWeightEntriesInput>
 }
 
+export type UserCreateNestedOneWithoutJourneyProfileInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJourneyProfileInput, Prisma.UserUncheckedCreateWithoutJourneyProfileInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJourneyProfileInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutJourneyProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJourneyProfileInput, Prisma.UserUncheckedCreateWithoutJourneyProfileInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJourneyProfileInput
+  upsert?: Prisma.UserUpsertWithoutJourneyProfileInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJourneyProfileInput, Prisma.UserUpdateWithoutJourneyProfileInput>, Prisma.UserUncheckedUpdateWithoutJourneyProfileInput>
+}
+
+export type UserCreateNestedOneWithoutHistoricAnchorsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHistoricAnchorsInput, Prisma.UserUncheckedCreateWithoutHistoricAnchorsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHistoricAnchorsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutHistoricAnchorsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHistoricAnchorsInput, Prisma.UserUncheckedCreateWithoutHistoricAnchorsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHistoricAnchorsInput
+  upsert?: Prisma.UserUpsertWithoutHistoricAnchorsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHistoricAnchorsInput, Prisma.UserUpdateWithoutHistoricAnchorsInput>, Prisma.UserUncheckedUpdateWithoutHistoricAnchorsInput>
+}
+
+export type UserCreateNestedOneWithoutScaleCalibrationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutScaleCalibrationsInput, Prisma.UserUncheckedCreateWithoutScaleCalibrationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutScaleCalibrationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutScaleCalibrationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutScaleCalibrationsInput, Prisma.UserUncheckedCreateWithoutScaleCalibrationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutScaleCalibrationsInput
+  upsert?: Prisma.UserUpsertWithoutScaleCalibrationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutScaleCalibrationsInput, Prisma.UserUpdateWithoutScaleCalibrationsInput>, Prisma.UserUncheckedUpdateWithoutScaleCalibrationsInput>
+}
+
+export type UserCreateNestedOneWithoutProposalsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProposalsInput, Prisma.UserUncheckedCreateWithoutProposalsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProposalsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutProposalsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProposalsInput, Prisma.UserUncheckedCreateWithoutProposalsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProposalsInput
+  upsert?: Prisma.UserUpsertWithoutProposalsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProposalsInput, Prisma.UserUpdateWithoutProposalsInput>, Prisma.UserUncheckedUpdateWithoutProposalsInput>
+}
+
 export type UserCreateWithoutAccountsInput = {
   id?: string
   name?: string | null
@@ -473,6 +557,10 @@ export type UserCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -486,6 +574,10 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -515,6 +607,10 @@ export type UserUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -528,6 +624,10 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -541,6 +641,10 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -554,6 +658,10 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -583,6 +691,10 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -596,6 +708,10 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWeightEntriesInput = {
@@ -609,6 +725,10 @@ export type UserCreateWithoutWeightEntriesInput = {
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWeightEntriesInput = {
@@ -622,6 +742,10 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWeightEntriesInput = {
@@ -651,6 +775,10 @@ export type UserUpdateWithoutWeightEntriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWeightEntriesInput = {
@@ -664,6 +792,346 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutJourneyProfileInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutJourneyProfileInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutJourneyProfileInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJourneyProfileInput, Prisma.UserUncheckedCreateWithoutJourneyProfileInput>
+}
+
+export type UserUpsertWithoutJourneyProfileInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJourneyProfileInput, Prisma.UserUncheckedUpdateWithoutJourneyProfileInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJourneyProfileInput, Prisma.UserUncheckedCreateWithoutJourneyProfileInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJourneyProfileInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJourneyProfileInput, Prisma.UserUncheckedUpdateWithoutJourneyProfileInput>
+}
+
+export type UserUpdateWithoutJourneyProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJourneyProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutHistoricAnchorsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileCreateNestedOneWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutHistoricAnchorsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedCreateNestedOneWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutHistoricAnchorsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutHistoricAnchorsInput, Prisma.UserUncheckedCreateWithoutHistoricAnchorsInput>
+}
+
+export type UserUpsertWithoutHistoricAnchorsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutHistoricAnchorsInput, Prisma.UserUncheckedUpdateWithoutHistoricAnchorsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutHistoricAnchorsInput, Prisma.UserUncheckedCreateWithoutHistoricAnchorsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutHistoricAnchorsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutHistoricAnchorsInput, Prisma.UserUncheckedUpdateWithoutHistoricAnchorsInput>
+}
+
+export type UserUpdateWithoutHistoricAnchorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUpdateOneWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutHistoricAnchorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedUpdateOneWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutScaleCalibrationsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutScaleCalibrationsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.ScenarioProposalUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutScaleCalibrationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutScaleCalibrationsInput, Prisma.UserUncheckedCreateWithoutScaleCalibrationsInput>
+}
+
+export type UserUpsertWithoutScaleCalibrationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutScaleCalibrationsInput, Prisma.UserUncheckedUpdateWithoutScaleCalibrationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutScaleCalibrationsInput, Prisma.UserUncheckedCreateWithoutScaleCalibrationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutScaleCalibrationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutScaleCalibrationsInput, Prisma.UserUncheckedUpdateWithoutScaleCalibrationsInput>
+}
+
+export type UserUpdateWithoutScaleCalibrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutScaleCalibrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.ScenarioProposalUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutProposalsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProposalsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedCreateNestedOneWithoutUserInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedCreateNestedManyWithoutUserInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProposalsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProposalsInput, Prisma.UserUncheckedCreateWithoutProposalsInput>
+}
+
+export type UserUpsertWithoutProposalsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProposalsInput, Prisma.UserUncheckedUpdateWithoutProposalsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProposalsInput, Prisma.UserUncheckedCreateWithoutProposalsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProposalsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProposalsInput, Prisma.UserUncheckedUpdateWithoutProposalsInput>
+}
+
+export type UserUpdateWithoutProposalsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProposalsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  journeyProfile?: Prisma.UserJourneyProfileUncheckedUpdateOneWithoutUserNestedInput
+  historicAnchors?: Prisma.HistoricAnchorUncheckedUpdateManyWithoutUserNestedInput
+  scaleCalibrations?: Prisma.ScaleCalibrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -675,12 +1143,18 @@ export type UserCountOutputType = {
   accounts: number
   sessions: number
   weightEntries: number
+  historicAnchors: number
+  scaleCalibrations: number
+  proposals: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   weightEntries?: boolean | UserCountOutputTypeCountWeightEntriesArgs
+  historicAnchors?: boolean | UserCountOutputTypeCountHistoricAnchorsArgs
+  scaleCalibrations?: boolean | UserCountOutputTypeCountScaleCalibrationsArgs
+  proposals?: boolean | UserCountOutputTypeCountProposalsArgs
 }
 
 /**
@@ -714,6 +1188,27 @@ export type UserCountOutputTypeCountWeightEntriesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.WeightEntryWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountHistoricAnchorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HistoricAnchorWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountScaleCalibrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ScaleCalibrationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountProposalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ScenarioProposalWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -727,6 +1222,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   weightEntries?: boolean | Prisma.User$weightEntriesArgs<ExtArgs>
+  journeyProfile?: boolean | Prisma.User$journeyProfileArgs<ExtArgs>
+  historicAnchors?: boolean | Prisma.User$historicAnchorsArgs<ExtArgs>
+  scaleCalibrations?: boolean | Prisma.User$scaleCalibrationsArgs<ExtArgs>
+  proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -768,6 +1267,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   weightEntries?: boolean | Prisma.User$weightEntriesArgs<ExtArgs>
+  journeyProfile?: boolean | Prisma.User$journeyProfileArgs<ExtArgs>
+  historicAnchors?: boolean | Prisma.User$historicAnchorsArgs<ExtArgs>
+  scaleCalibrations?: boolean | Prisma.User$scaleCalibrationsArgs<ExtArgs>
+  proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -779,6 +1282,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     weightEntries: Prisma.$WeightEntryPayload<ExtArgs>[]
+    journeyProfile: Prisma.$UserJourneyProfilePayload<ExtArgs> | null
+    historicAnchors: Prisma.$HistoricAnchorPayload<ExtArgs>[]
+    scaleCalibrations: Prisma.$ScaleCalibrationPayload<ExtArgs>[]
+    proposals: Prisma.$ScenarioProposalPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1186,6 +1693,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   weightEntries<T extends Prisma.User$weightEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$weightEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeightEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  journeyProfile<T extends Prisma.User$journeyProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$journeyProfileArgs<ExtArgs>>): Prisma.Prisma__UserJourneyProfileClient<runtime.Types.Result.GetResult<Prisma.$UserJourneyProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  historicAnchors<T extends Prisma.User$historicAnchorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$historicAnchorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HistoricAnchorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  scaleCalibrations<T extends Prisma.User$scaleCalibrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$scaleCalibrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScaleCalibrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  proposals<T extends Prisma.User$proposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScenarioProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1678,6 +2189,97 @@ export type User$weightEntriesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.WeightEntryScalarFieldEnum | Prisma.WeightEntryScalarFieldEnum[]
+}
+
+/**
+ * User.journeyProfile
+ */
+export type User$journeyProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserJourneyProfile
+   */
+  select?: Prisma.UserJourneyProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserJourneyProfile
+   */
+  omit?: Prisma.UserJourneyProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserJourneyProfileInclude<ExtArgs> | null
+  where?: Prisma.UserJourneyProfileWhereInput
+}
+
+/**
+ * User.historicAnchors
+ */
+export type User$historicAnchorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HistoricAnchor
+   */
+  select?: Prisma.HistoricAnchorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HistoricAnchor
+   */
+  omit?: Prisma.HistoricAnchorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HistoricAnchorInclude<ExtArgs> | null
+  where?: Prisma.HistoricAnchorWhereInput
+  orderBy?: Prisma.HistoricAnchorOrderByWithRelationInput | Prisma.HistoricAnchorOrderByWithRelationInput[]
+  cursor?: Prisma.HistoricAnchorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HistoricAnchorScalarFieldEnum | Prisma.HistoricAnchorScalarFieldEnum[]
+}
+
+/**
+ * User.scaleCalibrations
+ */
+export type User$scaleCalibrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ScaleCalibration
+   */
+  select?: Prisma.ScaleCalibrationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ScaleCalibration
+   */
+  omit?: Prisma.ScaleCalibrationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ScaleCalibrationInclude<ExtArgs> | null
+  where?: Prisma.ScaleCalibrationWhereInput
+  orderBy?: Prisma.ScaleCalibrationOrderByWithRelationInput | Prisma.ScaleCalibrationOrderByWithRelationInput[]
+  cursor?: Prisma.ScaleCalibrationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ScaleCalibrationScalarFieldEnum | Prisma.ScaleCalibrationScalarFieldEnum[]
+}
+
+/**
+ * User.proposals
+ */
+export type User$proposalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ScenarioProposal
+   */
+  select?: Prisma.ScenarioProposalSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ScenarioProposal
+   */
+  omit?: Prisma.ScenarioProposalOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ScenarioProposalInclude<ExtArgs> | null
+  where?: Prisma.ScenarioProposalWhereInput
+  orderBy?: Prisma.ScenarioProposalOrderByWithRelationInput | Prisma.ScenarioProposalOrderByWithRelationInput[]
+  cursor?: Prisma.ScenarioProposalWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ScenarioProposalScalarFieldEnum | Prisma.ScenarioProposalScalarFieldEnum[]
 }
 
 /**

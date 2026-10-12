@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --import ./tests/register-alias.mjs --test tests/property/journey.property.test.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.20",

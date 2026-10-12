@@ -1,0 +1,52 @@
+{
+  "profile": {
+    "heightCm": 180,
+    "birthYear": 1988,
+    "biologicalSex": "male",
+    "activityLevel": "moderate",
+    "resistanceTrainingDaysWk": 4,
+    "sleepHoursAvg": 7.5,
+    "goalType": "recomposition",
+    "targetWeightKg": 84.0,
+    "targetBodyFatPct": 15.0,
+    "targetMuscleMassKg": 68.0,
+    "preferredWeeklyRatePctBw": -0.5
+  },
+  "csvHeader": "Time,Weight,Weight Unit,BMI,Body Fat(%),Muscle Mass,VisceralFat,Body Water(%),Bone Mass,BMR,Note,Source",
+  "csvRows": [
+    "01-09-2026 07:30:00,92.4,kg,28.5,23.5,64.2,9,55.2,3.3,1920,Baseline start,renpho",
+    "04-09-2026 07:32:00,92.0,kg,28.4,23.2,64.3,9,55.4,3.3,1915,Morning weigh-in,renpho",
+    "08-09-2026 07:28:00,91.6,kg,28.3,22.9,64.4,9,55.6,3.3,1910,Week two,renpho",
+    "12-09-2026 07:35:00,91.2,kg,28.1,22.5,64.5,8,55.8,3.3,1905,Consistent deficit,renpho",
+    "16-09-2026 07:31:00,90.8,kg,28.0,22.1,64.6,8,56.0,3.3,1900,Mid-month check,renpho",
+    "20-09-2026 07:29:00,90.3,kg,27.9,21.8,64.7,8,56.2,3.3,1895,Strength session,renpho",
+    "24-09-2026 07:33:00,89.9,kg,27.7,21.4,64.8,8,56.4,3.3,1890,Good recovery,renpho",
+    "25-09-2026 07:30:00,90.5,kg,27.9,21.3,64.9,8,57.5,3.3,1895,High carb dinner water spike,renpho"
+  ],
+  "historicAnchors": [
+    {
+      "label": "10_years_ago",
+      "anchorDate": "2016-09-01T00:00:00.000Z",
+      "weightKg": 83.5,
+      "bodyFatPct": 14.5,
+      "ageAtAnchor": 28,
+      "lifestyleContext": "Club rugby conditioning"
+    },
+    {
+      "label": "5_years_ago",
+      "anchorDate": "2021-09-01T00:00:00.000Z",
+      "weightKg": 88.0,
+      "bodyFatPct": 18.0,
+      "ageAtAnchor": 33,
+      "lifestyleContext": "Hybrid training"
+    },
+    {
+      "label": "1_year_ago",
+      "anchorDate": "2025-09-01T00:00:00.000Z",
+      "weightKg": 91.0,
+      "bodyFatPct": 22.0,
+      "ageAtAnchor": 37,
+      "lifestyleContext": "Pre-recomposition baseline"
+    }
+  ]
+}
