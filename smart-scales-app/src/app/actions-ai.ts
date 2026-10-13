@@ -1,25 +1,62 @@
 'use server';
 
-import { prisma } from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
+import {
+  applyApprovedProposal,
+  createScenarioProposal,
+  resolveAuthenticatedUserId,
+} from '@/app/actions';
 
-export async function logWeightEntry(data: { weight: number; note?: string; bodyFat?: number }) {
-    try {
-        const newEntry = await prisma.weightEntry.create({
-            data: {
-                weight: data.weight,
-                timestamp: new Date(),
-                unit: 'kg',
-                note: data.note,
-                bodyFatPercentage: data.bodyFat,
-                source: 'manual_ai',
-            },
-        });
+/**
+ * Auth-isolated AI weight logging action.
+ * Never inserts orphaned rows with userId: null and never mutates WeightEntry directly
+ * without an explicit approvalRef.
+ */
+export async function logWeightEntry(data: {
+  weight: number;
+  note?: string;
+  bodyFat?: number;
+  muscleMass?: number;
+  timestamp?: string;
+  stateHash?: string;
+  approvalRef?: string;
+}) {
+  try {
+    // Enforce authentication (throws / redirects if unauthenticated)
+    await resolveAuthenticatedUserId();
 
-        revalidatePath('/');
-        return { success: true, entry: newEntry };
-    } catch (error) {
-        console.error("Error logging weight:", error);
-        return { success: false, error: "Failed to save entry" };
+    const proposal = await createScenarioProposal({
+      kind: 'log_entry',
+      stateHash: data.stateHash,
+      payload: {
+        weight: data.weight,
+        note: data.note ?? null,
+        bodyFat: data.bodyFat ?? null,
+        muscleMass: data.muscleMass ?? null,
+        timestamp: data.timestamp ?? new Date().toISOString(),
+      },
+    });
+
+    if (data.approvalRef && data.approvalRef.trim()) {
+      const applied = await applyApprovedProposal(
+        proposal.id,
+        proposal.stateHash,
+        data.approvalRef
+      );
+      return {
+        success: applied.success,
+        status: applied.success ? 'approved' : 'pending',
+        proposal,
+        error: applied.error,
+      };
     }
+
+    return {
+      success: true,
+      status: 'pending' as const,
+      proposal,
+    };
+  } catch (error) {
+    console.error('Error creating weight proposal:', error);
+    return { success: false, error: 'Failed to create weight entry proposal' };
+  }
 }

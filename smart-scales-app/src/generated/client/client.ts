@@ -74,3 +74,28 @@ export type PasswordResetToken = Prisma.PasswordResetTokenModel
  * 
  */
 export type WeightEntry = Prisma.WeightEntryModel
+/**
+ * Model UserJourneyProfile
+ * 
+ */
+export type UserJourneyProfile = Prisma.UserJourneyProfileModel
+/**
+ * Model HistoricAnchor
+ * 
+ */
+export type HistoricAnchor = Prisma.HistoricAnchorModel
+/**
+ * Model ScaleCalibration
+ * 
+ */
+export type ScaleCalibration = Prisma.ScaleCalibrationModel
+/**
+ * Model ScenarioProposal
+ * 
+ */
+export type ScenarioProposal = Prisma.ScenarioProposalModel
+/**
+ * Model LlmSpendLedger
+ * 
+ */
+export type LlmSpendLedger = Prisma.LlmSpendLedgerModel

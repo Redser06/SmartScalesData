@@ -6,21 +6,21 @@ A Next.js application for tracking weight and body composition data from smart s
 
 - **Weight Tracking Dashboard**: Visualize weight trends with interactive charts
 - **Body Composition Metrics**: Track body fat %, muscle mass, BMI, visceral fat, and more
-- **AI Chat Assistant**: Gemini 2.0-powered assistant that can:
-  - Log new weight entries via natural language
-  - Analyze your weight history and trends
-  - Provide motivational feedback
-- **CSV Import**: Import data from body fat scale CSV exports
-- **Predictions**: View projected weight based on recent trends
-- **Manual Entry Management**: Add and delete weight entries
+- **AI Chat Assistant**: Gemini 3.8 Flash-powered assistant that can:
+  - Propose new weight entries and target updates via natural language (with explicit user confirmation)
+  - Analyze your calibrated weight history, body composition, and trajectory bands
+  - Provide grounded motivational feedback
+- **CSV Import**: Import data from multi-brand body fat scale CSV exports with 7-day overlapping window calibration
+- **Predictions**: View seeded P10/P50/P90 trajectory bands and safety-clamped solution pathways
+- **Manual Entry Management**: Add and delete weight entries and historic anchors
 
 ## Tech Stack
 
 - **Framework**: Next.js 16 with App Router
 - **Database**: SQLite with Prisma ORM
-- **AI**: Google Gemini 2.0 Flash via Vercel AI SDK v6
+- **AI**: Google Gemini 3.8 Flash via Vercel AI SDK v6 (`provider.ts` with `$5.00/month` hard cap)
 - **UI**: Tailwind CSS, Radix UI, Lucide Icons
-- **Charts**: Recharts
+- **Charts**: Recharts (5-Chart Composition & Trajectory Suite)
 
 ## Getting Started
 

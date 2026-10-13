@@ -23,9 +23,13 @@ model User {
   image         String?
   password      String?   // For credentials provider (hashed)
 
-  accounts      Account[]
-  sessions      Session[]
-  weightEntries WeightEntry[]
+  accounts          Account[]
+  sessions          Session[]
+  weightEntries     WeightEntry[]
+  journeyProfile    UserJourneyProfile?
+  historicAnchors   HistoricAnchor[]
+  scaleCalibrations ScaleCalibration[]
+  proposals         ScenarioProposal[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -88,26 +92,29 @@ model PasswordResetToken {
 // ============================================
 
 model WeightEntry {
-  id                  Int      @id @default(autoincrement())
-  timestamp           DateTime
-  weight              Float
-  unit                String   @default("kg")
-  bmi                 Float?
-  bodyFatPercentage   Float?
-  muscleMass          Float?
-  visceralFat         Float?
-  bodyWaterPercentage Float?
-  boneMass            Float?
-  bmr                 Float?
-  bodyType            String?
-  bodyScore           Float?
-  proteinRate         Float?
-  skeletalMuscleRate  Float?
-  subcutaneousFat     Float?
-  leanBodyMass        Float?
-  note                String?
-  source              String   @default("old_scale")
-  rawData             String?
+  id                     Int      @id @default(autoincrement())
+  timestamp              DateTime
+  weight                 Float
+  unit                   String   @default("kg")
+  bmi                    Float?
+  bodyFatPercentage      Float?
+  muscleMass             Float?
+  visceralFat            Float?
+  bodyWaterPercentage    Float?
+  boneMass               Float?
+  bmr                    Float?
+  bodyType               String?
+  bodyScore              Float?
+  proteinRate            Float?
+  skeletalMuscleRate     Float?
+  subcutaneousFat        Float?
+  leanBodyMass           Float?
+  calibratedWeightKg     Float?
+  calibratedBodyFatPct   Float?
+  calibratedMuscleMassKg Float?
+  note                   String?
+  source                 String   @default("old_scale")
+  rawData                String?
 
   // User relationship for data isolation (optional during migration)
   userId String?
@@ -117,6 +124,87 @@ model WeightEntry {
   updatedAt DateTime @updatedAt
 
   // Index for user queries
+  @@unique([userId, timestamp])
   @@index([userId])
   @@index([timestamp])
+}
+
+model UserJourneyProfile {
+  id                       String    @id @default(cuid())
+  userId                   String    @unique
+  user                     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  heightCm                 Float
+  birthYear                Int
+  biologicalSex            String    // "male" | "female" | "other"
+  activityLevel            String    @default("moderate") // "sedentary" | "light" | "moderate" | "active" | "athlete"
+  resistanceTrainingDaysWk Int       @default(0)
+  sleepHoursAvg            Float?
+  lifestyleNotes           String?
+  goalType                 String    @default("recomposition") // "cut" | "recomposition" | "lean_bulk" | "maintain"
+  targetWeightKg           Float
+  targetBodyFatPct         Float?
+  targetMuscleMassKg       Float?
+  targetDate               DateTime?
+  preferredWeeklyRatePctBw Float     @default(-0.5)
+  userOverridesJson        String    @default("{}")
+  updatedAt                DateTime  @updatedAt
+}
+
+model HistoricAnchor {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label            String   // "1_year_ago" | "5_years_ago" | "10_years_ago" | "all_time_peak" | "adult_low"
+  anchorDate       DateTime
+  weightKg         Float
+  bodyFatPct       Float?
+  muscleMassKg     Float?
+  ageAtAnchor      Int?
+  lifestyleContext String?
+  origin           String   @default("user")
+  citationNote     String?
+  createdAt        DateTime @default(now())
+
+  @@index([userId, anchorDate])
+}
+
+model ScaleCalibration {
+  id                 String  @id @default(cuid())
+  userId             String
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sourceSlug         String
+  weightOffsetKg     Float   @default(0.0)
+  bodyFatOffsetPct   Float   @default(0.0)
+  muscleMassOffsetKg Float   @default(0.0)
+  isReferenceScale   Boolean @default(false)
+
+  @@unique([userId, sourceSlug])
+}
+
+model ScenarioProposal {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind        String   // "log_entry" | "update_target" | "apply_solution_pathway"
+  stateHash   String
+  payloadJson String
+  status      String   @default("pending") // "pending" | "approved" | "discarded"
+  approvalRef String?
+  createdAt   DateTime @default(now())
+
+  @@index([userId, status])
+}
+
+model LlmSpendLedger {
+  id        String   @id @default(cuid())
+  monthKey  String   // "YYYY-MM"
+  userId    String
+  nodeId    String
+  taskType  String
+  tokensIn  Int
+  tokensOut Int
+  costUsd   Float
+  createdAt DateTime @default(now())
+
+  @@index([monthKey, userId])
 }
